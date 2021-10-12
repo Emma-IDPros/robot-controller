@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include "Robot.h"
-#include "AllSensors.h"
+#include "RobotSensors.h"
 #include "configs.h"
 
 Robot robot;
-AllSensors sensors;
+RobotSensors Sensors;
 
 void setup() {
 
@@ -16,12 +16,12 @@ void setup() {
   }
   Serial.println("Motor Shield found.");
 
-  sensors.setPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
+  Sensors.setPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
 
 }
 
 void loop() {
-  float ultrasound_distance = sensors.Ultrasound.GetDistance();
+  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
 
   if (ultrasound_distance < 25) {
     robot.StopAll();
