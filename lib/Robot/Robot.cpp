@@ -5,6 +5,15 @@
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 #include <Robot.h>
 
+void Robot::MotorShieldTest() {
+	Serial.println("Adafruit Motorshield v2 - DC Motor test!");
+	if (!AFMS.begin()) {
+		Serial.println("Could not find Motor Shield. Check wiring.");
+		while (1);
+	}
+	Serial.println("Motor Shield found.");
+};
+
 void Robot::Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION) {
 	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
 	motor->setSpeed(speed);

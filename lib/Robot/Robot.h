@@ -11,7 +11,7 @@ public:
 	Adafruit_DCMotor* Motor1 = AFMS.getMotor(3);
 	Adafruit_DCMotor* Motor2 = AFMS.getMotor(4);
 
-
+	void MotorShieldTest();
 	void Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION);
 	void MoveAll(uint8_t speed, uint8_t DIRECTION);
 	void Stop(uint8_t motor_number);
