@@ -22,8 +22,7 @@ void setup() {
   Serial.println("Motor Shield found.");
 
   sensors.setPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
-  pinMode(US_pinTrig, OUTPUT);
-  pinMode(US_pinEcho, INPUT);
+
 }
 
 void loop() {

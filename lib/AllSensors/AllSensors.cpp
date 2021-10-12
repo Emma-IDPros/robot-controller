@@ -37,4 +37,7 @@ void AllSensors::setPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A
 	Ultrasound.US_pinEcho = US_pinEcho;
 	A21.IR_A21pin = IR_A21pin;
 	A02.IR_A02pin = IR_A02pin;
+
+	pinMode(US_pinTrig, OUTPUT);
+	pinMode(US_pinEcho, INPUT);
 }
