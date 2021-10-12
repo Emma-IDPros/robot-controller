@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <AllSensors.h>
 
-float Ultrasound::getDistance() {
+float Ultrasound::GetDistance() {
 	digitalWrite(US_pinTrig, LOW);
 	delayMicroseconds(3);
 	digitalWrite(US_pinTrig, HIGH);//sends out ultrasound signal
@@ -12,7 +12,7 @@ float Ultrasound::getDistance() {
 	return timeTaken * 0.0343 * calibration / 2;
 }
 
-float IR_A02::getDistance() {
+float IR_A02::GetDistance() {
 	int DistanceAdd = 0;
 	for (int i = 0; i < 20; i++) {//takes multiple measurements
 		int val = analogRead(IR_A02pin);
@@ -22,7 +22,7 @@ float IR_A02::getDistance() {
 	return DistanceAdd / 20;
 }
 
-float IR_A21::getDistance() {
+float IR_A21::GetDistance() {
 	int DistanceAdd = 0;
 	for (int i = 0; i < 20; i++) {//takes multiple measurements
 		int val = analogRead(IR_A21pin);

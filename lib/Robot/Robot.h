@@ -12,9 +12,9 @@ public:
 	Adafruit_DCMotor* Motor2 = AFMS.getMotor(4);
 
 
-	void move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION);
-	void move_all(uint8_t speed, uint8_t DIRECTION);
-	void release(uint8_t motor_number);
-	void release_all();
+	void Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION);
+	void MoveAll(uint8_t speed, uint8_t DIRECTION);
+	void Stop(uint8_t motor_number);
+	void StopAll();
 	Adafruit_DCMotor* motor_from_motor_number(uint8_t motor_number);
 };

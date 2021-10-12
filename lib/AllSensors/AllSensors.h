@@ -4,7 +4,7 @@ class Ultrasound {
 public:
 	int US_pinTrig;
 	int US_pinEcho;
-	float getDistance();
+	float GetDistance();
 
 };
 
@@ -12,14 +12,14 @@ class IR_A02 {
 public:
 	int IR_A02pin;
 
-	float getDistance();
+	float GetDistance();
 
 };
 class IR_A21 {
 public:
 	int IR_A21pin;
 
-	float getDistance();
+	float GetDistance();
 
 };
 

@@ -5,25 +5,25 @@
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 #include <Robot.h>
 
-void Robot::move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION) {
+void Robot::Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION) {
 	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
 	motor->setSpeed(speed);
 	motor->run(DIRECTION);
 };
 
-void Robot::move_all(uint8_t speed, uint8_t DIRECTION) {
+void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
 	Motor1->setSpeed(speed);
 	Motor1->run(DIRECTION);
 	Motor2->setSpeed(speed);
 	Motor2->run(DIRECTION);
 };
 
-void Robot::release(uint8_t motor_number) {
+void Robot::Stop(uint8_t motor_number) {
 	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
 	motor->run(RELEASE);
 };
 
-void Robot::release_all() {
+void Robot::StopAll() {
 	Motor1->run(RELEASE);
 	Motor2->run(RELEASE);
 };
