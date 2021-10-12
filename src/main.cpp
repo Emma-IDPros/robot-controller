@@ -1,8 +1,4 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include <SPI.h>
-#include <Adafruit_MotorShield.h>
-#include "utility/Adafruit_MS_PWMServoDriver.h"
 #include "Robot.h"
 #include "AllSensors.h"
 int IR_A02pin = 0;//must be analog
