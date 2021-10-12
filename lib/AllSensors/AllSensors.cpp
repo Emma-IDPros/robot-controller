@@ -1,12 +1,5 @@
 #include <Arduino.h>
-
-class Ultrasound {
-public:
-	int US_pinTrig = 3;
-	int US_pinEcho = 2;
-	float getDistance();
-
-};
+#include <AllSensors.h>
 
 float Ultrasound::getDistance() {
 	digitalWrite(US_pinTrig, LOW);
@@ -19,14 +12,6 @@ float Ultrasound::getDistance() {
 	return timeTaken * 0.0343 * calibration / 2;
 }
 
-class IR_A02 {
-public:
-	int IR_A02pin = 0;
-
-	float getDistance();
-
-};
-
 float IR_A02::getDistance() {
 	int DistanceAdd = 0;
 	for (int i = 0; i < 20; i++) {//takes multiple measurements
@@ -37,15 +22,6 @@ float IR_A02::getDistance() {
 	return DistanceAdd / 20;
 }
 
-
-class IR_A21 {
-public:
-	int IR_A21pin = 0;
-
-	float getDistance();
-
-};
-
 float IR_A21::getDistance() {
 	int DistanceAdd = 0;
 	for (int i = 0; i < 20; i++) {//takes multiple measurements
@@ -55,21 +31,6 @@ float IR_A21::getDistance() {
 	}
 	return DistanceAdd / 20;
 }
-
-class IR {
-public:
-	IR_A21 A21;
-	IR_A02 A02;
-
-};
-
-class AllSensors {
-public:
-	Ultrasound Ultrasound;
-	IR_A21 A21;
-	IR_A02 A02;
-	void setPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A02pin);
-};
 
 void AllSensors::setPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A02pin) {
 	Ultrasound.US_pinEcho = US_pinEcho;
