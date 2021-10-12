@@ -9,15 +9,9 @@ RobotSensors Sensors;
 void setup() {
 
   Serial.begin(9600);
-  Serial.println("Adafruit Motorshield v2 - DC Motor test!");
-  if (!robot.AFMS.begin()) {
-    Serial.println("Could not find Motor Shield. Check wiring.");
-    while (1);
-  }
-  Serial.println("Motor Shield found.");
 
+  robot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.setPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
-
 }
 
 void loop() {
