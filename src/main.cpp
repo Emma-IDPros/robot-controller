@@ -1,15 +1,10 @@
 #include <Arduino.h>
 #include "Robot.h"
 #include "AllSensors.h"
-int IR_A02pin = 0;//must be analog
-int IR_A21pin = 0;//must be analog
-int US_pinTrig = 3;//must be digital
-int US_pinEcho = 2;//must be digital
-
+#include "configs.h"
 
 Robot robot;
 AllSensors sensors;
-
 
 void setup() {
 
