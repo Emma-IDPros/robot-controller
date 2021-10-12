@@ -21,18 +21,15 @@ void setup() {
 }
 
 void loop() {
-  float ultrasound_distance = sensors.Ultrasound.getDistance();
+  float ultrasound_distance = sensors.Ultrasound.GetDistance();
 
   if (ultrasound_distance < 25) {
-    robot.release_all();
+    robot.StopAll();
   }
   else {
-    robot.move_all(255, BACKWARD);
+    robot.MoveAll(255, BACKWARD);
   }
   delay(500);
-
-  Serial.print("IR Distance: ");
-  Serial.println(String(ultrasound_distance) + "cm");
 
   Serial.print("Ultrasound Distance: ");
   Serial.println(String(ultrasound_distance) + "cm");
