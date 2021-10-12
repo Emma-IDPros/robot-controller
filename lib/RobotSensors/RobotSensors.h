@@ -30,7 +30,7 @@ public:
 
 };
 
-class AllSensors {
+class RobotSensors {
 public:
 	Ultrasound Ultrasound;
 	IR_A21 A21;
