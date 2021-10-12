@@ -11,7 +11,7 @@ void setup() {
   Serial.begin(9600);
 
   robot.MotorShieldTest(); // Test to see if board can be detected
-  Sensors.setPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
+  Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
 }
 
 void loop() {

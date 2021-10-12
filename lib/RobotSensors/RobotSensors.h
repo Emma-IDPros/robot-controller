@@ -35,5 +35,5 @@ public:
 	Ultrasound Ultrasound;
 	IR_A21 A21;
 	IR_A02 A02;
-	void setPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A02pin);
+	void SetPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A02pin);
 };
