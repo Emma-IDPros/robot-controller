@@ -27,3 +27,7 @@ void WiFiComms::Get(String endpoint) {
 	client.get(base_url + endpoint);
 	client.endRequest();
 }
+
+void WiFiComms::SendCoords(float x, float y) {
+	Get("/coords/" + String(x) + "/" + String(y));
+}

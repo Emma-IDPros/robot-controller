@@ -11,5 +11,6 @@ public:
 	int wl_status = WL_IDLE_STATUS;
 	void Connect();
 	void Get(String endpoint);
+	void SendCoords(float x, float y);
 
 };
