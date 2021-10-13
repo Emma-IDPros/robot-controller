@@ -19,20 +19,26 @@ void setup() {
 }
 
 void loop() {
+
   float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   Serial.print("Ultrasound Distance: ");
-  Serial.println(String(ultrasound_distance) + "cm");
-  // Bot.StopAll();
-  // delay(500);
-  // Bot.MoveAll(255, BACKWARD);
-  // delay(500);
+  Serial.println(String(ultrasound_distance));
+  if (ultrasound_distance < 20) {
 
-  // char buffer[8];    // string buffer for use with dtostrf() function
+    Bot.StopAll();
+  }
+  else {
 
-  // imu.ReadAcceleration();
-  // Serial.print("ax = ");  Serial.print(dtostrf(imu.ax, 4, 1, buffer));  Serial.print(" m/s^2, ");
-  // Serial.print("ay = ");  Serial.print(dtostrf(imu.ay, 4, 1, buffer));  Serial.print(" m/s^2, ");
-  // Serial.print("az = ");  Serial.print(dtostrf(imu.az, 4, 1, buffer));  Serial.print(" m/s^2, ");
-  // Serial.println(" ");
+    Bot.MoveAll(255, BACKWARD);
+  }
+  delay(500);
+
+  char buffer[8];    // string buffer for use with dtostrf() function
+
+  imu.ReadAcceleration();
+  Serial.print("ax = ");  Serial.print(String(imu.ax));  Serial.print(" m/s^2, ");
+  Serial.print("ay = ");  Serial.print(String(imu.ay));  Serial.print(" m/s^2, ");
+  Serial.print("az = ");  Serial.print(String(imu.az));  Serial.print(" m/s^2, ");
+  Serial.println(" ");
 
 }

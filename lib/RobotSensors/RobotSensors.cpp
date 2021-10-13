@@ -9,7 +9,9 @@ float Ultrasound::GetDistance() {
 	digitalWrite(US_pinTrig, LOW);
 	long timeTaken = pulseIn(US_pinEcho, HIGH);//recieves time taken to get reply
 	float calibration = 1.03;//calibration factor
-	return timeTaken * 0.049 * calibration / 2;
+	float intermiediate = timeTaken * 0.049 * calibration / 2;
+	float linear_fit = (intermiediate - 0.268) / 1.3633;
+	return linear_fit;
 }
 
 float IR_A02::GetDistance() {
