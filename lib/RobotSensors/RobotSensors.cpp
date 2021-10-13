@@ -34,7 +34,7 @@ float IR_A21::GetDistance() {
 
 void RobotSensors::SetPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A02pin) {
 	Ultrasound.US_pinEcho = US_pinEcho;
-	Ultrasound.US_pinEcho = US_pinEcho;
+	Ultrasound.US_pinTrig = US_pinTrig;
 	A21.IR_A21pin = IR_A21pin;
 	A02.IR_A02pin = IR_A02pin;
 
