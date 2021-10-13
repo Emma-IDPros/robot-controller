@@ -1,4 +1,5 @@
 #include <WiFiComms.h>
+#include <Arduino.h>
 
 void WiFiComms::Connect() {
 	while (wl_status != WL_CONNECTED) {
@@ -18,4 +19,11 @@ void WiFiComms::Connect() {
 
 	Serial.println(ip);
 	client.println();
+}
+
+void WiFiComms::Get(String endpoint) {
+	client.beginRequest();
+	String base_url = "http://" + String(serverAddress) + ":" + String(port);
+	client.get(base_url + endpoint);
+	client.endRequest();
 }
