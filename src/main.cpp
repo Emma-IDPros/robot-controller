@@ -15,17 +15,19 @@ void setup() {
 }
 
 void loop() {
-  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+  // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+  // Serial.print("Ultrasound Distance: ");
+  // Serial.println(String(ultrasound_distance) + "cm");
 
-  if (ultrasound_distance < 25) {
-    Bot.StopAll();
-  }
-  else {
-    Bot.MoveAll(255, BACKWARD);
-  }
+
+  // if (ultrasound_distance < 25) {
+  // }
+  // else {
+  // }
+  Bot.StopAll();
+  delay(500);
+  Bot.MoveAll(255, BACKWARD);
   delay(500);
 
-  Serial.print("Ultrasound Distance: ");
-  Serial.println(String(ultrasound_distance) + "cm");
 
 }
