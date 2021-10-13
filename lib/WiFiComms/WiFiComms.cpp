@@ -32,5 +32,5 @@ void WiFiComms::Get(String endpoint) {
 }
 
 void WiFiComms::SendCoords(float x, float y) {
-	Get("/coords/" + String(x) + "/" + String(y));
+	Get("/coord/" + String(x) + "/" + String(y));
 }
