@@ -4,6 +4,6 @@
 class RobotIMU {
 public:
 	float ax, ay, az;
-	IMU IMU;
 	void ReadAcceleration();
+	void Begin();
 };
