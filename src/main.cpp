@@ -3,10 +3,12 @@
 #include "RobotSensors.h"
 #include "configs.h"
 #include "IMU.h"
+#include "WiFiComms.h"
 
 Robot Bot;
 RobotSensors Sensors;
 RobotIMU imu;
+WiFiComms WiFiComm;
 
 void setup() {
 
@@ -15,6 +17,7 @@ void setup() {
   Bot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
   imu.Begin();
+  WiFiComm.Connect();
 
 }
 
@@ -40,5 +43,7 @@ void loop() {
   Serial.print("ay = ");  Serial.print(String(imu.ay));  Serial.print(" m/s^2, ");
   Serial.print("az = ");  Serial.print(String(imu.az));  Serial.print(" m/s^2, ");
   Serial.println(" ");
+
+  WiFiComm.SendCoords(imu.ax, imu.ay);
 
 }
