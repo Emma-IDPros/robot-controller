@@ -30,15 +30,17 @@ void RobotIMU::Begin() {
  */
 void RobotIMU::Integrate() {
 	double delta_t = (millis() - prevMilliSeconds) / 1000;
-	vx += TrapeziumArea(prev_ax, ax, delta_t);
-	vy += TrapeziumArea(prev_ay, ay, delta_t);
-	vz += TrapeziumArea(prev_az, az, delta_t);
-	x += TrapeziumArea(prev_vx, vx, delta_t);
-	y += TrapeziumArea(prev_vy, vy, delta_t);
-	z += TrapeziumArea(prev_vz, vz, delta_t);
+	if (abs(ax) > 0.03) {
+		vx += TrapeziumArea(prev_ax, ax, delta_t);
+		vy += TrapeziumArea(prev_ay, ay, delta_t);
+		vz += TrapeziumArea(prev_az, az, delta_t);
+		x += TrapeziumArea(prev_vx, vx, delta_t);
+		y += TrapeziumArea(prev_vy, vy, delta_t);
+		z += TrapeziumArea(prev_vz, vz, delta_t);
 
-	prev_ax = ax; prev_ay = ay; prev_az = az;
-	prev_vx = vx; prev_vy = vy; prev_vz = vz;
+		prev_ax = ax; prev_ay = ay; prev_az = az;
+		prev_vx = vx; prev_vy = vy; prev_vz = vz;
+	}
 	prevMilliSeconds = millis();
 }
 
