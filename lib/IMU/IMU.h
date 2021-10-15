@@ -4,6 +4,11 @@
 class RobotIMU {
 public:
 	float ax, ay, az;
+	float vx, vy, vz;
+	float x, y, z;
 	void ReadAcceleration();
 	void Begin();
+	void Integrate();
+private:
+	float prevMilliSeconds = millis();
 };
