@@ -43,7 +43,6 @@ void loop() {
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
-    WiFiComm.Message("hi");
     WiFiComm.Message("Ultrasound Distance: " + String(ultrasound_distance));
     WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "ay = " + String(BotIMU.ay) + " ms^-2, " + "az = " + String(BotIMU.az) + " ms^-2, ");
     WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);
