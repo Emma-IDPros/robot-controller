@@ -51,6 +51,5 @@ void WiFiComms::SendCoords(float x, float y) {
 
 void WiFiComms::Message(String message) {
 	message.replace(" ", "%20");
-	Serial.println("/message/" + message);
 	Get("/message/" + message);
 }
