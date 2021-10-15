@@ -29,6 +29,13 @@ void WiFiComms::Get(String endpoint) {
 	String base_url = "http://" + String("192.168.137.1") + ":" + String(6969);
 	client.get(base_url + endpoint);
 	client.endRequest();
+	int statusCode = client.responseStatusCode();
+	String response = client.responseBody();
+
+	Serial.print("Status code: ");
+	Serial.println(statusCode);
+	Serial.print("Response: ");
+	Serial.println(response);
 }
 
 void WiFiComms::SendCoords(float x, float y) {
@@ -36,5 +43,7 @@ void WiFiComms::SendCoords(float x, float y) {
 }
 
 void WiFiComms::Message(String message) {
+	message.replace(" ", "%20");
+	Serial.println("/message/" + message);
 	Get("/message/" + message);
 }
