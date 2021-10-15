@@ -5,8 +5,10 @@
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 
+// Robot Class
 class Robot {
 public:
+	// Adafruit Motor Shield Object
 	Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 	Adafruit_DCMotor* Motor1 = AFMS.getMotor(3);
 	Adafruit_DCMotor* Motor2 = AFMS.getMotor(4);
