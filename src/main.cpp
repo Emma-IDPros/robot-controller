@@ -3,16 +3,14 @@
 #include "RobotSensors.h"
 #include "configs.h"
 #include "IMU.h"
-// #define WIFI_DEBUG
+#include "Logger.h"
 
-#ifdef WIFI_DEBUG
-#include "WiFiComms.h"
-WiFiComms WiFiComm;
-#endif
+
 
 Robot Bot;
 RobotSensors Sensors;
 RobotIMU imu;
+Logger Log;
 
 void setup() {
 
@@ -21,17 +19,15 @@ void setup() {
   Bot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
   imu.Begin();
+  Log.Connect();
 
-#ifdef WIFI_DEBUG
-  WiFiComm.Connect();
-#endif
 
 }
 
 void loop() {
 
   float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-  Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
+  Log.PrintLn("Ultrasound Distance: " + String(ultrasound_distance));
 
   if (ultrasound_distance < 20) {
     Bot.StopAll();
@@ -46,9 +42,7 @@ void loop() {
   Serial.print("az = ");  Serial.print(String(imu.az));  Serial.print(" m/s^2, ");
   Serial.println(" ");
 
-#ifdef WIFI_DEBUG
-  WiFiComm.SendCoords(imu.ax, imu.ay);
-#endif
+
 
   delay(500);
 }
