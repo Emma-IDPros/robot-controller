@@ -5,12 +5,19 @@
 
 
 void WiFiComms::Connect() {
+	int i = 0;
 	while (wl_status != WL_CONNECTED) {
+		i++;
 		Serial.print("Attempting to connect to Network named: ");
 		Serial.println("LAPTOP-HI8GMNAK 7424");
 
 		// Connect to WPA/WPA2 network:
 		wl_status = WiFi.begin("LAPTOP-HI8GMNAK 7424", "021E=19t");
+
+		if (i > 5) {
+			Serial.println("Failed to connect 5 times, breaking");
+			break;
+		}
 	}
 	// print the SSID of the network you're attached to:
 	Serial.print("SSID: ");
@@ -29,13 +36,13 @@ void WiFiComms::Get(String endpoint) {
 	String base_url = "http://" + String("192.168.137.1") + ":" + String(6969);
 	client.get(base_url + endpoint);
 	client.endRequest();
-	int statusCode = client.responseStatusCode();
-	String response = client.responseBody();
+	int status_code = client.responseStatusCode();
 
-	Serial.print("Status code: ");
-	Serial.println(statusCode);
-	Serial.print("Response: ");
-	Serial.println(response);
+
+	if (status_code == 404) {
+		Serial.println("404 Error in making request to " + endpoint);
+	}
+
 }
 
 void WiFiComms::SendCoords(float x, float y) {
