@@ -2,8 +2,7 @@
 #include <ArduinoHttpClient.h>
 #include <WiFiNINA.h>
 #include <Arduino.h>
-#include <configs.h>
-
+// #define WIFI_EVALUATE_STATUS_CODES
 
 void WiFiComms::Connect() {
 	int i = 0;
