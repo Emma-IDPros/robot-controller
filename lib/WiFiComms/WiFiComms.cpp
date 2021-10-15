@@ -2,6 +2,7 @@
 #include <ArduinoHttpClient.h>
 #include <WiFiNINA.h>
 #include <Arduino.h>
+#include <configs.h>
 
 
 void WiFiComms::Connect() {
@@ -36,12 +37,13 @@ void WiFiComms::Get(String endpoint) {
 	String base_url = "http://" + String("192.168.137.1") + ":" + String(6969);
 	client.get(base_url + endpoint);
 	client.endRequest();
+
+#ifdef WIFI_EVALUATE_STATUS_CODES
 	int status_code = client.responseStatusCode();
-
-
 	if (status_code == 404) {
 		Serial.println("404 Error in making request to " + endpoint);
 	}
+#endif
 
 }
 
