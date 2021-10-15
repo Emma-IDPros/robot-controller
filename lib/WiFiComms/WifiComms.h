@@ -12,5 +12,6 @@ public:
 	void Connect();
 	void Get(String endpoint);
 	void SendCoords(float x, float y);
+	void Message(String message);
 
 };
