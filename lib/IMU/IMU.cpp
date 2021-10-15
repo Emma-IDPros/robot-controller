@@ -30,7 +30,9 @@ void RobotIMU::Begin() {
  */
 void RobotIMU::Integrate() {
 	double delta_t = (millis() - prevMilliSeconds) / 1000;
-	vx += ax * delta_t; vy += ay * delta_t; vz += az * delta_t;
-	x += vx * delta_t;y += vy * delta_t;z += vz * delta_t;
+	if (abs(ax) > 0.03) {
+		vx += ax * delta_t; vy += ay * delta_t; vz += az * delta_t;
+		x += vx * delta_t;y += vy * delta_t;z += vz * delta_t;
+	}
 	prevMilliSeconds = millis();
 }
