@@ -5,6 +5,10 @@
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 #include <Robot.h>
 
+/**
+ * @brief Runs the Adafruit Test Script for the
+ * Motor Shield.
+ */
 void Robot::MotorShieldTest() {
 	Serial.println("Adafruit Motorshield v2 - DC Motor test!");
 	if (!AFMS.begin()) {
@@ -14,12 +18,32 @@ void Robot::MotorShieldTest() {
 	Serial.println("Motor Shield found.");
 };
 
+/**
+ * @brief Makes a specifc motor move
+ *
+ * @param motor_number
+ * The motor that you want to move (1 or 2)
+ * @param speed
+ * 8 bit int (0-255) to set the speed of rotation
+ * @param DIRECTION
+ * Direction of rotation.
+ * Either FORWARDS or BACKWARDS
+ */
 void Robot::Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION) {
 	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
 	motor->setSpeed(speed);
 	motor->run(DIRECTION);
 };
 
+/**
+ * @brief Makes both motors move
+ *
+ * @param speed
+ * 8 bit int (0-255) to set the speed of rotation
+ * @param DIRECTION
+ * Direction of rotation.
+ * Either FORWARDS or BACKWARDS
+ */
 void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
 	Motor1->setSpeed(speed);
 	Motor1->run(DIRECTION);
@@ -27,16 +51,33 @@ void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
 	Motor2->run(DIRECTION);
 };
 
+/**
+ * @brief Stops a specific motor from moving
+ *
+ * @param motor_number
+ * The motor that you want to stop (1 or 2)
+ */
 void Robot::Stop(uint8_t motor_number) {
 	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
 	motor->run(RELEASE);
 };
 
+/**
+ * @brief Stops all motors from moving
+ */
 void Robot::StopAll() {
 	Motor1->run(RELEASE);
 	Motor2->run(RELEASE);
 };
 
+/**
+ * @brief Returns an Adafruit_DCMotor pointer given a motor number
+ *
+ * @param motor_number
+ * The motor you want
+ * @return Adafruit_DCMotor*
+ * Returns a pointer to that specific motor
+ */
 Adafruit_DCMotor* Robot::motor_from_motor_number(uint8_t motor_number) {
 	switch (motor_number)
 	{
