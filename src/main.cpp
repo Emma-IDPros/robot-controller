@@ -28,22 +28,22 @@ void setup() {
 
 void loop() {
 
-  // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-  // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
+  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+  Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
-  // if (ultrasound_distance < 20) {
-  //   Bot.StopAll();
-  // }
-  // else {
-  //   Bot.MoveAll(255, BACKWARD);
-  // }
+  if (ultrasound_distance < 20) {
+    Bot.StopAll();
+  }
+  else {
+    Bot.MoveAll(255, BACKWARD);
+  }
 
   BotIMU.ReadAcceleration();
   Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
-    // WiFiComm.Message("Ultrasound Distance: " + String(ultrasound_distance));
+    WiFiComm.Message("Ultrasound Distance: " + String(ultrasound_distance));
     WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "ay = " + String(BotIMU.ay) + " ms^-2, " + "az = " + String(BotIMU.az) + " ms^-2, ");
     WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);
   }
