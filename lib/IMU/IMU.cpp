@@ -56,3 +56,28 @@ void RobotIMU::Integrate() {
 float RobotIMU::TrapeziumArea(float a, float b, float h) {
 	return 0.5 * (a + b) * h;
 }
+
+// verlet integrator for just the z axis
+void RobotIMU::VerletInt() {
+	double delta_t = (millis() - prevMilliSeconds) / 1000;
+
+	if (abs(az) > 0.03) { // acceleration threshold
+
+		if (millis() == 0) {
+			position = 0;
+			velocity = 0;
+			new_position = position + velocity * delta_t;
+			velocity = velocity + az * delta_t;
+		}
+		else {
+		new_position = 2 * position - prev_position + pow(delta_t, 2) * az;
+		velocity = (new_position - position) / delta_t;
+		}
+
+		prev_position = position;
+		position = new_position;
+
+	}
+	
+	prevMilliSeconds = millis();
+}

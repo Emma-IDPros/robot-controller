@@ -15,9 +15,14 @@ public:
 	void ReadAcceleration();
 	void Begin();
 	void Integrate();
+
+	void VerletInt();
+
 private:
 	float prevMilliSeconds = millis();
 	float prev_ax, prev_ay, prev_az;
 	float prev_vx, prev_vy, prev_vz;
 	float TrapeziumArea(float a, float b, float h);
+
+	float new_position, prev_position, position, velocity;
 };
