@@ -29,8 +29,9 @@ void RobotIMU::Begin() {
  * attributes as vx, vy, vz and x, y, z
  */
 void RobotIMU::Integrate() {
+	// cumulative trapezium
 	double delta_t = (millis() - prevMilliSeconds) / 1000;
-	if (abs(ax) > 0.03) {
+	if (abs(ax) > 0.03) { // acceleration threshold
 		vx += TrapeziumArea(prev_ax, ax, delta_t);
 		vy += TrapeziumArea(prev_ay, ay, delta_t);
 		vz += TrapeziumArea(prev_az, az, delta_t);
@@ -44,6 +45,14 @@ void RobotIMU::Integrate() {
 	prevMilliSeconds = millis();
 }
 
+/**
+ * @brief Calculates the area of a trapezium
+ *
+ * @param a base
+ * @param b base
+ * @param h height
+ * @return float area
+ */
 float RobotIMU::TrapeziumArea(float a, float b, float h) {
 	return 0.5 * (a + b) * h;
 }
