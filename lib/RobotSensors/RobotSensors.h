@@ -1,5 +1,6 @@
 #pragma once
 
+// Class for the ultrasound
 class Ultrasound {
 public:
 	int US_pinTrig;
@@ -8,6 +9,7 @@ public:
 
 };
 
+// Class for the IR sensors A02
 class IR_A02 {
 public:
 	int IR_A02pin;
@@ -15,6 +17,8 @@ public:
 	float GetDistance();
 
 };
+
+// Class for the IR sensors A21
 class IR_A21 {
 public:
 	int IR_A21pin;
@@ -23,6 +27,7 @@ public:
 
 };
 
+// Class for both IR sensors
 class IR {
 public:
 	IR_A21 A21;
@@ -30,6 +35,7 @@ public:
 
 };
 
+// Class for all the sensors
 class RobotSensors {
 public:
 	Ultrasound Ultrasound;
