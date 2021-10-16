@@ -19,16 +19,17 @@ void WiFiComms::Connect() {
 			break;
 		}
 	}
-	// print the SSID of the network you're attached to:
-	Serial.print("SSID: ");
-	Serial.println(WiFi.SSID());
+	if (wl_status == WL_CONNECTED) {// print the SSID of the network you're attached to:
+		Serial.print("SSID: ");
+		Serial.println(WiFi.SSID());
 
-	// print your WiFi shield's IP address:
-	IPAddress ip = WiFi.localIP();
-	Serial.print("IP Address: ");
+		// print your WiFi shield's IP address:
+		IPAddress ip = WiFi.localIP();
+		Serial.print("IP Address: ");
 
-	Serial.println(ip);
-	client.println();
+		Serial.println(ip);
+		client.println();
+	}
 }
 
 void WiFiComms::Get(String endpoint) {
