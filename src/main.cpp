@@ -20,6 +20,7 @@ void setup() {
   Serial.begin(9600);
   Bot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
+  MetalDetector.SetPins(MD_pin_pulse, MD_pin_cap, MD_pin_LED1, MD_pin_LED2);
   BotIMU.Begin();
 
 #ifdef WIFI_DEBUG
