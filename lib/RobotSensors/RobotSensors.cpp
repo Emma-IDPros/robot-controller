@@ -3,7 +3,6 @@
 
 /**
  * @brief Gets the distance from the ultrasound (in cm)
- * (accuracy +-3cm, range 5-100cm, line of sight)
  *
  * @return float distance (cm)
  */
@@ -38,6 +37,7 @@ float IR_A02::GetDistance() {
 
 /**
  * @brief Gets the distance from the A21 IR sensor (in cm)
+ * (accuracy +-3cm, range 5-100cm, line of sight)
  *
  * @return float distance (cm)
  */
@@ -45,7 +45,7 @@ float IR_A21::GetDistance() {
 	int DistanceAdd = 0;
 	for (int i = 0; i < 20; i++) {//takes multiple measurements
 		int val = analogRead(IR_A21pin);
-		DistanceAdd += 2 + 10808 / val; //calculates distance from analog value
+		DistanceAdd += -5 + 6402 / val; //calculates distance from analog value
 		delayMicroseconds(2);
 	}
 	return DistanceAdd / 20;

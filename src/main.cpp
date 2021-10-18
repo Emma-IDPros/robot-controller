@@ -27,9 +27,12 @@ void setup() {
 }
 
 void loop() {
-
+  delay(800);
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
+
+  float ir_distance = Sensors.A21.GetDistance();
+  Serial.println(String(ir_distance));
 
   // if (ultrasound_distance < 20) {
   //   Bot.StopAll();
@@ -38,10 +41,10 @@ void loop() {
   //   Bot.MoveAll(255, BACKWARD);
   // }
 
-  BotIMU.ReadAcceleration();
-  BotIMU.Integrate();
-  // Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
-  Serial.println("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
+  // BotIMU.ReadAcceleration();
+  // BotIMU.Integrate();
+  // // Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
+  // Serial.println("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
