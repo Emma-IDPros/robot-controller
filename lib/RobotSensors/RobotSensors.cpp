@@ -3,6 +3,7 @@
 
 /**
  * @brief Gets the distance from the ultrasound (in cm)
+ * (accuracy +-3cm, range 5-100cm, line of sight)
  *
  * @return float distance (cm)
  */
@@ -21,6 +22,7 @@ float Ultrasound::GetDistance() {
 
 /**
  * @brief Gets the distance from the A02 IR sensor (in cm)
+ * (accuracy +-5cm, range 20-160cm, line of sight)
  *
  * @return float distance (cm)
  */
