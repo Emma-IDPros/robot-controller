@@ -3,6 +3,7 @@
 #include "RobotSensors.h"
 #include "configs.h"
 #include "IMU.h"
+#include "MetalDetector.h"
 
 #ifdef WIFI_DEBUG
 #include "WiFiComms.h"
@@ -12,6 +13,7 @@ WiFiComms WiFiComm;
 Robot Bot;
 RobotSensors Sensors;
 RobotIMU BotIMU;
+RobotMetalDetector MetalDetector;
 
 void setup() {
 
