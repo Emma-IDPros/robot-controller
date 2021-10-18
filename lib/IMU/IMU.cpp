@@ -28,22 +28,22 @@ void RobotIMU::Begin() {
  * velocity and displacement. The velocity and displacement are stored in the
  * attributes as vx, vy, vz and x, y, z
  */
-void RobotIMU::Integrate() {
-	// cumulative trapezium
-	double delta_t = (millis() - prevMilliSeconds) / 1000;
-	if (abs(ax) > 0.03) { // acceleration threshold
-		vx += TrapeziumArea(prev_ax, ax, delta_t);
-		vy += TrapeziumArea(prev_ay, ay, delta_t);
-		vz += TrapeziumArea(prev_az, az, delta_t);
-		x += TrapeziumArea(prev_vx, vx, delta_t);
-		y += TrapeziumArea(prev_vy, vy, delta_t);
-		z += TrapeziumArea(prev_vz, vz, delta_t);
+// void RobotIMU::Integrate() {
+// 	// cumulative trapezium
+// 	double delta_t = (millis() - prevMilliSeconds) / 1000;
+// 	if (abs(ax) > 0.03) { // acceleration threshold
+// 		vx += TrapeziumArea(prev_ax, ax, delta_t);
+// 		vy += TrapeziumArea(prev_ay, ay, delta_t);
+// 		vz += TrapeziumArea(prev_az, az, delta_t);
+// 		x += TrapeziumArea(prev_vx, vx, delta_t);
+// 		y += TrapeziumArea(prev_vy, vy, delta_t);
+// 		z += TrapeziumArea(prev_vz, vz, delta_t);
 
-		prev_ax = ax; prev_ay = ay; prev_az = az;
-		prev_vx = vx; prev_vy = vy; prev_vz = vz;
-	}
-	prevMilliSeconds = millis();
-}
+// 		prev_ax = ax; prev_ay = ay; prev_az = az;
+// 		prev_vx = vx; prev_vy = vy; prev_vz = vz;
+// 	}
+// 	prevMilliSeconds = millis();
+// }
 
 /**
  * @brief Calculates the area of a trapezium
@@ -63,7 +63,7 @@ void RobotIMU::VerletInt() {
 
 	if (abs(az) > 0.03) { // acceleration threshold
 
-		if (millis() == 0) {
+		if (counter == 0) {
 			position = 0;
 			velocity = 0;
 			new_position = position + velocity * delta_t;
@@ -76,6 +76,9 @@ void RobotIMU::VerletInt() {
 
 		prev_position = position;
 		position = new_position;
+
+		counter ++;
+		
 
 	}
 	
