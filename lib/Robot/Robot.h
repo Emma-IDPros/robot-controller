@@ -5,6 +5,8 @@
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 
+enum ROTATION { CLOCKWISE, ANTICLOCKWISE };
+
 // Robot Class
 class Robot {
 public:
@@ -18,8 +20,8 @@ public:
 	void MoveAll(uint8_t speed, uint8_t DIRECTION);
 	void Stop(uint8_t motor_number);
 	void StopAll();
-	void Rotate(uint8_t angle, bool clockwise);
+	void Rotate(uint8_t angle, ROTATION rotation);
 	float rotation_time;
-	
+
 	Adafruit_DCMotor* motor_from_motor_number(uint8_t motor_number);
 };

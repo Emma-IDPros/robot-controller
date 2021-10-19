@@ -80,9 +80,9 @@ void Robot::StopAll() {
  * Direction of robot rotation (either true for clockwise or false for anticlockwise)
  */
 
-void Robot::Rotate(uint8_t angle, bool clockwise) {
+void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 	rotation_time = 0;
-	if (angle == 90, clockwise == true) {
+	if (angle == 90, rotation == CLOCKWISE) {
 		while (rotation_time < 160) {
 			Move(1, 255, FORWARD);
 			Move(2, 255, BACKWARD);
@@ -91,7 +91,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 		}
 		StopAll();
 	}
-	else if (angle == 90, clockwise == false) {
+	else if (angle == 90, rotation == ANTICLOCKWISE) {
 		while (rotation_time < 160) {
 			Move(1, 255, BACKWARD);
 			Move(2, 255, FORWARD);
@@ -100,7 +100,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 		}
 		StopAll();
 	}
-	else if (angle == 180, clockwise == true) {
+	else if (angle == 180, rotation == CLOCKWISE) {
 		while (rotation_time < 320) {
 			Move(1, 255, FORWARD);
 			Move(2, 255, BACKWARD);
@@ -109,7 +109,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 		}
 		StopAll();
 	}
-	else if (angle == 180, clockwise == false) {
+	else if (angle == 180, rotation == ANTICLOCKWISE) {
 		while (rotation_time < 320) {
 			Move(1, 255, BACKWARD);
 			Move(2, 255, FORWARD);
