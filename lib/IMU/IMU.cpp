@@ -29,25 +29,25 @@ RAMP_DIRECTION RobotIMU::DetectRamp() {
 }
 
 
-void RobotIMU::ReadAngles() {
-	if (IMU.accelerationAvailable()) {
-		IMU.readAcceleration(ax, ay, az);
-	}
-	if (IMU.gyroscopeAvailable()) {
-		IMU.readGyroscope(gx, gy, gz);
-		gx *= 0.01745329251;
-		gy *= 0.01745329251;
-		gz *= 0.01745329251;
+// void RobotIMU::ReadAngles() {
+// 	if (IMU.accelerationAvailable()) {
+// 		IMU.readAcceleration(ax, ay, az);
+// 	}
+// 	if (IMU.gyroscopeAvailable()) {
+// 		IMU.readGyroscope(gx, gy, gz);
+// 		gx *= 0.01745329251;
+// 		gy *= 0.01745329251;
+// 		gz *= 0.01745329251;
 
-		// Serial.println(String(gx));
-	}
-	deltat = fusion.deltatUpdate(); //this have to be done before calling the fusion update
-	fusion.MahonyUpdate(gx, gy, gz, ax, ay, az, deltat);  //mahony is suggested if there isn't the mag and the mcu is slow
+// 		// Serial.println(String(gx));
+// 	}
+// 	deltat = fusion.deltatUpdate(); //this have to be done before calling the fusion update
+// 	fusion.MahonyUpdate(gx, gy, gz, ax, ay, az, deltat);  //mahony is suggested if there isn't the mag and the mcu is slow
 
-	pitch = fusion.getPitch();
-	roll = fusion.getRoll();    //you could also use getRollRadians() ecc
-	yaw = fusion.getYaw();
-}
+// 	pitch = fusion.getPitch();
+// 	roll = fusion.getRoll();    //you could also use getRollRadians() ecc
+// 	yaw = fusion.getYaw();
+// }
 
 /**
  * @brief Begins the connection to the IMU
