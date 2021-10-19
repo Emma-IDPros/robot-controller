@@ -5,6 +5,8 @@
 #include "IMU.h"
 #include "MetalDetector.h"
 #include "LineSensor.h"
+// #define WIFI_DEBUG
+
 
 #ifdef WIFI_DEBUG
 #include "WiFiComms.h"
@@ -76,7 +78,7 @@ void loop() {
   }
   else {
     Serial.println("WiFi failed to connected, no WiFi logging");
-  }
+}
 #endif
 
   // delay(10);
