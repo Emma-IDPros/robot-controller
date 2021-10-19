@@ -78,7 +78,7 @@ void loop() {
   }
   else {
     Serial.println("WiFi failed to connected, no WiFi logging");
-}
+  }
 #endif
 
   // delay(10);
