@@ -49,7 +49,7 @@ void loop() {
   //   Bot.MoveAll(255, FORWARD);
   // }
 
-  Bot.Rotate(180, true);
+  Bot.Rotate(180, CLOCKWISE);
   BotIMU.ReadAcceleration();
   Serial.println(String(BotIMU.DetectRamp()));
 
