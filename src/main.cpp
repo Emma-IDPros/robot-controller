@@ -41,15 +41,15 @@ void loop() {
   //   Bot.StopAll();
   // }
   // else {
-  //   Bot.MoveAll(255, BACKWARD);
+  //   Bot.MoveAll(255, FORWARD);
   // }
 
   // BotIMU.ReadAcceleration();
-  BotIMU.ReadAngles();
+  // BotIMU.ReadAngles();
   // BotIMU.Integrate();
   // Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
   // Serial.println("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
-  Serial.println("ax = " + String(BotIMU.yaw) + " ms^-2, " + "ay = " + String(BotIMU.roll) + " ms^-2, " + "az = " + String(BotIMU.pitch) + " ms^-2, ");
+  // Serial.println("ax = " + String(BotIMU.yaw) + " ms^-2, " + "ay = " + String(BotIMU.roll) + " ms^-2, " + "az = " + String(BotIMU.pitch) + " ms^-2, ");
 
   // BotIMU.VerletInt();
   // Serial.println("az = " + String(BotIMU.az) + " ms^-2, " + "vz = " + String(BotIMU.velocity) + " ms^-1, " + "z = " + String(BotIMU.position) + " m, ");
@@ -63,7 +63,7 @@ void loop() {
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "ay = " + String(BotIMU.ay) + " ms^-2, " + "az = " + String(BotIMU.az) + " ms^-2, ");
     // WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);
-    WiFiComm.Message("ax = " + String(BotIMU.yaw) + " ms^-2, " + "ay = " + String(BotIMU.roll) + " ms^-2, " + "az = " + String(BotIMU.pitch) + " ms^-2, ");
+    // WiFiComm.Message("ax = " + String(BotIMU.yaw) + " ms^-2, " + "ay = " + String(BotIMU.roll) + " ms^-2, " + "az = " + String(BotIMU.pitch) + " ms^-2, ");
 
   }
   else {
