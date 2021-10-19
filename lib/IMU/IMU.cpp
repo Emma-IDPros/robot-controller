@@ -14,8 +14,21 @@ void RobotIMU::ReadAcceleration() {
 	}
 }
 
-bool RobotIMU::IsWithIn(float number, float range) {
-	return (number > number - range) && (number < number + range);
+RAMP_DIRECTION RobotIMU::DetectRamp() {
+	if (IsWithIn(ax, -3, 0.3) && IsWithIn(az, 9.3, 0.3)) {
+		return UP;
+	}
+	else if (IsWithIn(ax, 3, 0.3) && IsWithIn(az, 9.3, 0.3)) {
+		return DOWN;
+	}
+	else {
+		return FLAT;
+	}
+
+}
+
+bool RobotIMU::IsWithIn(float number, float comparator, float range) {
+	return (number > comparator - range) && (number < comparator + range);
 }
 
 void RobotIMU::ReadAngles() {

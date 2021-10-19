@@ -32,7 +32,7 @@ private:
 	float prev_ax, prev_ay, prev_az;
 	float prev_vx, prev_vy, prev_vz;
 	float TrapeziumArea(float a, float b, float h);
-	bool IsWithIn(float number, float range);
+	bool IsWithIn(float number, float comparator, float range);
 	float deltat;
 	SF fusion;
 
