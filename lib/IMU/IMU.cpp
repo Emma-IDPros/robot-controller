@@ -14,6 +14,10 @@ void RobotIMU::ReadAcceleration() {
 	}
 }
 
+bool RobotIMU::IsWithIn(float number, float range) {
+	return (number > number - range) && (number < number + range);
+}
+
 void RobotIMU::ReadAngles() {
 	if (IMU.accelerationAvailable()) {
 		IMU.readAcceleration(ax, ay, az);
