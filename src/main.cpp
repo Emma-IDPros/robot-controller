@@ -34,8 +34,8 @@ void loop() {
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
-  float ir_distance = Sensors.A21.GetDistance();
-  Serial.println(String(ir_distance));
+  // float ir_distance = Sensors.A21.GetDistance();
+  // Serial.println(String(ir_distance));
 
   // if (ultrasound_distance < 20) {
   //   Bot.StopAll();
@@ -48,12 +48,14 @@ void loop() {
   Bot.Rotate(180, true);
   
   // BotIMU.ReadAcceleration();
+  BotIMU.ReadAngles();
   // BotIMU.Integrate();
-  // // Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
+  // Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
   // Serial.println("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
+  Serial.println("ax = " + String(BotIMU.yaw) + " ms^-2, " + "ay = " + String(BotIMU.roll) + " ms^-2, " + "az = " + String(BotIMU.pitch) + " ms^-2, ");
 
-  BotIMU.VerletInt();
-  Serial.println("az = " + String(BotIMU.az) + " ms^-2, " + "vz = " + String(BotIMU.velocity) + " ms^-1, " + "z = " + String(BotIMU.position) + " m, ");
+  // BotIMU.VerletInt();
+  // Serial.println("az = " + String(BotIMU.az) + " ms^-2, " + "vz = " + String(BotIMU.velocity) + " ms^-1, " + "z = " + String(BotIMU.position) + " m, ");
 
 
 
@@ -61,9 +63,11 @@ void loop() {
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
     // WiFiComm.Message("Ultrasound Distance: " + String(ultrasound_distance));
-    WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
+    // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "ay = " + String(BotIMU.ay) + " ms^-2, " + "az = " + String(BotIMU.az) + " ms^-2, ");
-    WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);
+    // WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);
+    WiFiComm.Message("ax = " + String(BotIMU.yaw) + " ms^-2, " + "ay = " + String(BotIMU.roll) + " ms^-2, " + "az = " + String(BotIMU.pitch) + " ms^-2, ");
+
   }
   else {
     Serial.println("WiFi failed to connected, no WiFi logging");
