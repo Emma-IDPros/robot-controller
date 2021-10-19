@@ -89,6 +89,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 			delay(10);
 			rotation_time++;
 		}
+		StopAll();
 	}
 	else if (angle == 90, clockwise == false) {
 		while (rotation_time < 160) {
@@ -97,6 +98,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 			delay(10);
 			rotation_time++;
 		}
+		StopAll();
 	}
 	else if (angle == 180, clockwise == true) {
 		while (rotation_time < 320) {
@@ -105,6 +107,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 			delay(10);
 			rotation_time++;
 		}
+		StopAll();
 	}
 	else if (angle == 180, clockwise == false) {
 		while (rotation_time < 320) {
@@ -113,6 +116,7 @@ void Robot::Rotate(uint8_t angle, bool clockwise) {
 			delay(10);
 			rotation_time++;
 		}
+		StopAll();
 	}
 
 }
