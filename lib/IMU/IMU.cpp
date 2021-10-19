@@ -1,5 +1,6 @@
 #include <IMU.h>
 #include <Arduino_LSM6DS3.h>
+#include <Math.h>
 
 /**
  * @brief Reads the acceleration from the IMU and stores it in the attributes
@@ -15,10 +16,10 @@ void RobotIMU::ReadAcceleration() {
 }
 
 RAMP_DIRECTION RobotIMU::DetectRamp() {
-	if (IsWithIn(ax, -3, 0.3) && IsWithIn(az, 9.3, 0.3)) {
+	if (Math.IsWithIn(ax, -3, 0.3) && Math.IsWithIn(az, 9.3, 0.3)) {
 		return UP;
 	}
-	else if (IsWithIn(ax, 3, 0.3) && IsWithIn(az, 9.3, 0.3)) {
+	else if (Math.IsWithIn(ax, 3, 0.3) && Math.IsWithIn(az, 9.3, 0.3)) {
 		return DOWN;
 	}
 	else {
@@ -27,9 +28,6 @@ RAMP_DIRECTION RobotIMU::DetectRamp() {
 
 }
 
-bool RobotIMU::IsWithIn(float number, float comparator, float range) {
-	return (number > comparator - range) && (number < comparator + range);
-}
 
 void RobotIMU::ReadAngles() {
 	if (IMU.accelerationAvailable()) {
@@ -69,12 +67,12 @@ void RobotIMU::Integrate() {
 	// cumulative trapezium
 	double delta_t = (millis() - prevMilliSeconds) / 1000;
 	if (abs(ax) > 0.03) { // acceleration threshold
-		vx += TrapeziumArea(prev_ax, ax, delta_t);
-		vy += TrapeziumArea(prev_ay, ay, delta_t);
-		vz += TrapeziumArea(prev_az, az, delta_t);
-		x += TrapeziumArea(prev_vx, vx, delta_t);
-		y += TrapeziumArea(prev_vy, vy, delta_t);
-		z += TrapeziumArea(prev_vz, vz, delta_t);
+		vx += Math.TrapeziumArea(prev_ax, ax, delta_t);
+		vy += Math.TrapeziumArea(prev_ay, ay, delta_t);
+		vz += Math.TrapeziumArea(prev_az, az, delta_t);
+		x += Math.TrapeziumArea(prev_vx, vx, delta_t);
+		y += Math.TrapeziumArea(prev_vy, vy, delta_t);
+		z += Math.TrapeziumArea(prev_vz, vz, delta_t);
 
 		prev_ax = ax; prev_ay = ay; prev_az = az;
 		prev_vx = vx; prev_vy = vy; prev_vz = vz;
@@ -82,17 +80,7 @@ void RobotIMU::Integrate() {
 	prevMilliSeconds = millis();
 }
 
-/**
- * @brief Calculates the area of a trapezium
- *
- * @param a base
- * @param b base
- * @param h height
- * @return float area
- */
-float RobotIMU::TrapeziumArea(float a, float b, float h) {
-	return 0.5 * (a + b) * h;
-}
+
 
 // verlet integrator for just the z axis
 void RobotIMU::VerletInt() {
