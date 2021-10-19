@@ -44,6 +44,9 @@ void loop() {
   //   Bot.MoveAll(255, FORWARD);
   // }
 
+
+  Bot.Rotate(180, true);
+  
   // BotIMU.ReadAcceleration();
   // BotIMU.ReadAngles();
   // BotIMU.Integrate();
