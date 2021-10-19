@@ -71,6 +71,52 @@ void Robot::StopAll() {
 };
 
 /**
+ * @brief moves motors at max speed in opposite directions to rotate
+ * 
+ * @param angle
+ * Angle either 90 degrees or 180 degrees
+ * 
+ * @param clockwise
+ * Direction of robot rotation (either true for clockwise or false for anticlockwise)
+ */
+
+void Robot::Rotate(uint8_t angle, bool clockwise) {
+	rotation_time = 0;
+	if (angle == 90, clockwise == true) {
+		while (rotation_time < 50) {
+			Move(1, 255, FORWARD);
+			Move(2, 255, BACKWARD);
+			delay(10);
+			rotation_time ++;
+		}
+	}
+	else if (angle == 90, clockwise == false) {
+		while (rotation_time < 50) {
+			Move(1, 255, BACKWARD);
+			Move(2, 255, FORWARD);
+			delay(10);
+			rotation_time ++;
+		}
+	}
+	else if (angle == 180, clockwise == true) {
+		while (rotation_time < 100) {
+			Move(1, 255, FORWARD);
+			Move(2, 255, BACKWARD);
+			delay(10);
+			rotation_time ++;
+		}
+	}
+	else if (angle == 180, clockwise == false) {
+		while (rotation_time < 100) {
+			Move(1, 255, BACKWARD);
+			Move(2, 255, FORWARD);
+			delay(10);
+			rotation_time ++;
+		}
+	}
+
+}
+/**
  * @brief Returns an Adafruit_DCMotor pointer given a motor number
  *
  * @param motor_number

@@ -44,6 +44,9 @@ void loop() {
   //   Bot.MoveAll(255, BACKWARD);
   // }
 
+
+  Bot.Rotate(180, true);
+  
   // BotIMU.ReadAcceleration();
   // BotIMU.Integrate();
   // // Serial.println("ax = " + String(BotIMU.ax) + " m/s^2, " + "ay = " + String(BotIMU.ay) + " m/s^2, " + "az = " + String(BotIMU.az) + " m/s^2, ");
