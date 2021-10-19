@@ -14,6 +14,21 @@ void RobotIMU::ReadAcceleration() {
 	}
 }
 
+void RobotIMU::ReadAngles() {
+	if (IMU.accelerationAvailable()) {
+		IMU.readAcceleration(ax, ay, az);
+	}
+	if (IMU.gyroscopeAvailable()) {
+		IMU.readGyroscope(gx, gy, gz);
+	}
+	deltat = fusion.deltatUpdate(); //this have to be done before calling the fusion update
+	fusion.MahonyUpdate(gx, gy, gz, ax, ay, az, deltat);  //mahony is suggested if there isn't the mag and the mcu is slow
+
+	pitch = fusion.getPitch();
+	roll = fusion.getRoll();    //you could also use getRollRadians() ecc
+	yaw = fusion.getYaw();
+}
+
 /**
  * @brief Begins the connection to the IMU
  */
@@ -70,17 +85,17 @@ void RobotIMU::VerletInt() {
 			velocity = velocity + az * delta_t;
 		}
 		else {
-		new_position = 2 * position - prev_position + pow(delta_t, 2) * az;
-		velocity = (new_position - position) / delta_t;
+			new_position = 2 * position - prev_position + pow(delta_t, 2) * az;
+			velocity = (new_position - position) / delta_t;
 		}
 
 		prev_position = position;
 		position = new_position;
 
-		counter ++;
-		
+		counter++;
+
 
 	}
-	
+
 	prevMilliSeconds = millis();
 }

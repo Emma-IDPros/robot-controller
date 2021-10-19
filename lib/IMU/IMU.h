@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino_LSM6DS3.h>
+#include <SensorFusion.h>
 
 /**
  * @brief Class for the Inertial Measurement Unit
@@ -16,8 +17,9 @@ public:
 	float vx, vy, vz;
 	// positon
 	float x, y, z;
-	void ReadAcceleration();g
-		void Begin();
+	void ReadAcceleration();
+	void ReadAngles();
+	void Begin();
 	void Integrate();
 
 	void VerletInt();
@@ -28,6 +30,8 @@ private:
 	float prev_ax, prev_ay, prev_az;
 	float prev_vx, prev_vy, prev_vz;
 	float TrapeziumArea(float a, float b, float h);
+	float deltat;
+	SF fusion;
 
 
 	float counter;
