@@ -107,7 +107,7 @@ void RobotIMU::VerletInt() {
 			velocity = velocity + az * delta_t;
 		}
 		else {
-			new_position = 2 * position - prev_position + pow(delta_t, 2) * az;
+			new_position = 2 * position - prev_position + delta_t * delta_t * az;
 			velocity = (new_position - position) / delta_t;
 		}
 
