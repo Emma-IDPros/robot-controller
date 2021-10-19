@@ -59,7 +59,7 @@ float IR_A21::GetDistance() {
  * @param IR_A21pin  A21 pin (ANALOGUE)
  * @param IR_A02pin  A02 pin (ANALOGUE)
  */
-void RobotSensors::SetPins(int US_pinTrig, int US_pinEcho, int IR_A21pin, int IR_A02pin) {
+void RobotSensors::SetPins(byte US_pinTrig, byte US_pinEcho, byte IR_A21pin, byte IR_A02pin) {
 	Ultrasound.US_pinEcho = US_pinEcho;
 	Ultrasound.US_pinTrig = US_pinTrig;
 	A21.IR_A21pin = IR_A21pin;
