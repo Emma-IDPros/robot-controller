@@ -7,4 +7,4 @@ extern const byte MD_pin_pulse = A0;
 extern const byte MD_pin_cap = A1;
 extern const byte MD_pin_LED1 = 12;
 extern const byte MD_pin_LED2 = 11;
-#define WIFI_DEBUG
+// #define WIFI_DEBUG
