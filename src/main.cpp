@@ -5,6 +5,7 @@
 #include "IMU.h"
 #include "MetalDetector.h"
 #include "LineSensor.h"
+#include "PickUp.h"
 // #define WIFI_DEBUG
 
 
@@ -18,6 +19,7 @@ RobotSensors Sensors;
 RobotIMU BotIMU;
 RobotMetalDetector MetalDetector;
 RobotLineSensor LineSensor;
+RobotPickUp PickUp;
 
 void setup() {
 
@@ -26,6 +28,7 @@ void setup() {
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
   MetalDetector.SetPins(MD_pin_pulse, MD_pin_cap, MD_pin_LED1, MD_pin_LED2);
   LineSensor.SetPins(line_pin_sense, line_detect_pin);
+  PickUp.SetPins(PU_servo_pon);
   BotIMU.Begin();
 
 #ifdef WIFI_DEBUG
@@ -51,8 +54,9 @@ void loop() {
   // else {
   // Bot.MoveAll(255, FORWARD);
   // // }
+  PickUp.SweepTest();
 
-  Bot.Rotate(180, CLOCKWISE, ON);
+  // Bot.Rotate(180, CLOCKWISE, ON);
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
 
