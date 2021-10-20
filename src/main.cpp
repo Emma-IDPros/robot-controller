@@ -31,14 +31,22 @@ void setup() {
   PickUp.SetPins(PU_servo_pon);
   BotIMU.Begin();
 
+
 #ifdef WIFI_DEBUG
   WiFiComm.Connect();
 #endif
 
 }
-int i;
+long int i;
 void loop() {
-  // delay(800);
+  i++;
+  if (i == 1) {
+    // PickUp.SetInitalAngle(0);
+    PickUp.SweepTest();
+    Serial.println("Setting init");
+  }
+  delay(800);
+
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
@@ -54,7 +62,7 @@ void loop() {
   // else {
   // Bot.MoveAll(255, FORWARD);
   // // }
-  PickUp.SweepTest();
+  // PickUp.Sweep(180);
 
   // Bot.Rotate(180, CLOCKWISE, ON);
   // BotIMU.ReadAcceleration();

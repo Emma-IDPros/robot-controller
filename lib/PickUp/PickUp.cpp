@@ -8,19 +8,25 @@ void RobotPickUp::Sweep(int to_angle) {
 	if (angle > to_angle) {
 		while (angle > to_angle) {
 			servo.write(angle);
+			Serial.println(angle);
 			angle--;
+			delay(15);
 		}
 	}
 	else {
 		while (angle < to_angle) {
 			servo.write(angle);
+			Serial.println(angle);
 			angle++;
+			delay(15);
 		}
 	}
 }
 
-void RobotPickUp::SetInitalAngle(int angle) {
+void RobotPickUp::SetInitalAngle(int angle_inp) {
+	angle = angle_inp;
 	servo.write(angle);
+	delay(30);
 }
 
 void RobotPickUp::SweepTest() {
