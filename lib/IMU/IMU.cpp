@@ -15,6 +15,13 @@ void RobotIMU::ReadAcceleration() {
 	}
 }
 
+/**
+ * @brief Uses the IMU acceleration values to
+ * determine if the robot is on the RAMP or not,
+ * and which side of the ramp
+ *
+ * @return RAMP_DIRECTION
+ */
 RAMP_DIRECTION RobotIMU::DetectRamp() {
 	if (Math.IsWithIn(ax, -3, 0.3) && Math.IsWithIn(az, 9.3, 0.3)) {
 		return UP;
