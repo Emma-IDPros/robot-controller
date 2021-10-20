@@ -6,7 +6,7 @@
 #include "MetalDetector.h"
 #include "LineSensor.h"
 #include "PickUp.h"
-// #define WIFI_DEBUG
+#define WIFI_DEBUG
 
 
 #ifdef WIFI_DEBUG
@@ -40,15 +40,15 @@ void setup() {
 long int i;
 void loop() {
   i++;
-  if (i == 1) {
-    // PickUp.SetInitalAngle(0);
-    PickUp.SweepTest();
-    Serial.println("Setting init");
-  }
-  delay(800);
+  // if (i == 1) {
+  //   // PickUp.SetInitalAngle(0);
+  //   PickUp.SweepTest();
+  //   Serial.println("Setting init");
+  // }
+  // delay(800);
 
-  // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-  // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
+  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+  Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
   // float res = LineSensor.LineFollowSense();
   // Serial.println(String(res));
@@ -56,13 +56,13 @@ void loop() {
   // float ir_distance = Sensors.A21.GetDistance();
   // Serial.println(String(ir_distance));
 
-  // if (ultrasound_distance < 20) {
-  //   Bot.StopAll();
-  // }
-  // else {
-  // Bot.MoveAll(255, FORWARD);
-  // // }
-  // PickUp.Sweep(180);
+  if (ultrasound_distance < 30) {
+    Bot.StopAll();
+    Bot.Rotate(180, CLOCKWISE, ON);
+  }
+  else {
+    Bot.MoveAll(255, FORWARD);
+  }
 
   // Bot.Rotate(180, CLOCKWISE, ON);
   // BotIMU.ReadAcceleration();
@@ -82,9 +82,9 @@ void loop() {
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
-    WiFiComm.Message(String(BotIMU.DetectRamp()));
+    // WiFiComm.Message(String(BotI?MU.DetectRamp()));
 
-    // WiFiComm.Message("Ultrasound Distance: " + String(ultrasound_distance));
+    WiFiComm.Message(String(ultrasound_distance));
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "ay = " + String(BotIMU.ay) + " ms^-2, " + "az = " + String(BotIMU.az) + " ms^-2, ");
     // WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);
