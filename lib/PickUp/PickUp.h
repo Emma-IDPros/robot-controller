@@ -9,6 +9,7 @@ public:
 	void SetPins(byte servo_pin);
 	void SweepTest();
 	void Sweep(int to_angle);
+	void SetInitalAngle(int angle);
 
 private:
 	byte PU_pin_servo;
