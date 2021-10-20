@@ -36,7 +36,7 @@ void setup() {
 int i;
 void loop() {
   delay(800);
-  // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
   float res = LineSensor.LineFollowSense();
@@ -45,14 +45,18 @@ void loop() {
   // float ir_distance = Sensors.A21.GetDistance();
   // Serial.println(String(ir_distance));
 
-  // if (ultrasound_distance < 20) {
-  //   Bot.StopAll();
-  // }
-  // else {
-  //   Bot.MoveAll(255, FORWARD);
-  // // }
+  if (ultrasound_distance < 20) {
+    Bot.StopAll();
+    Bot.Rotate(180, CLOCKWISE);
+  }
+  else {
+    Bot.MoveAll(255, FORWARD);
+  }
+  
+  //Bot.Rotate(180, CLOCKWISE);
+  
 
-  Bot.Rotate(180, CLOCKWISE, ON);
+
   BotIMU.ReadAcceleration();
   Serial.println(String(BotIMU.DetectRamp()));
 

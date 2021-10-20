@@ -78,24 +78,11 @@ void Robot::StopAll() {
  *
  * @param clockwise
  * Direction of robot rotation (either true for clockwise or false for anticlockwise)
- *
- * @param rotating
- * To run the function once when called
  */
 
-void Robot::Rotate(uint8_t angle, ROTATION rotation, ROTATE_ON rotating) {
+void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 	rotation_time = 0;
-	if (angle == 90, rotation == CLOCKWISE, rotating = ON) {
-		while (rotation_time < 160) {
-			Move(1, 255, FORWARD);
-			Move(2, 255, BACKWARD);
-			delay(10);
-			rotation_time++;
-		}
-		StopAll();
-		rotating = OFF;
-	}
-	else if (angle == 90, rotation == ANTICLOCKWISE, rotating = ON) {
+	if (angle == 90, rotation == CLOCKWISE) {
 		while (rotation_time < 160) {
 			Move(1, 255, BACKWARD);
 			Move(2, 255, FORWARD);
@@ -103,19 +90,17 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation, ROTATE_ON rotating) {
 			rotation_time++;
 		}
 		StopAll();
-		rotating = OFF;
 	}
-	else if (angle == 180, rotation == CLOCKWISE, rotating = ON) {
-		while (rotation_time < 320) {
+	else if (angle == 90, rotation == ANTICLOCKWISE) {
+		while (rotation_time < 160) {
 			Move(1, 255, FORWARD);
 			Move(2, 255, BACKWARD);
 			delay(10);
 			rotation_time++;
 		}
 		StopAll();
-		rotating = OFF;
 	}
-	else if (angle == 180, rotation == ANTICLOCKWISE, rotating = ON) {
+	else if (angle == 180, rotation == CLOCKWISE) {
 		while (rotation_time < 320) {
 			Move(1, 255, BACKWARD);
 			Move(2, 255, FORWARD);
@@ -123,9 +108,16 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation, ROTATE_ON rotating) {
 			rotation_time++;
 		}
 		StopAll();
-		rotating = OFF;
 	}
-
+	else if (angle == 180, rotation == ANTICLOCKWISE) {
+		while (rotation_time < 320) {
+			Move(1, 255, FORWARD);
+			Move(2, 255, BACKWARD);
+			delay(10);
+			rotation_time++;
+		}
+		StopAll();
+	}
 }
 /**
  * @brief Returns an Adafruit_DCMotor pointer given a motor number
