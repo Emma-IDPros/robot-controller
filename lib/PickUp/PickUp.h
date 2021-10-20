@@ -10,4 +10,4 @@ public:
 
 private:
 	byte PU_pin_servo;
-}
+};
