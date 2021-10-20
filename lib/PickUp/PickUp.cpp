@@ -1,9 +1,21 @@
 #include <PickUp.h>
 
+/**
+ * @brief Set pins
+ *
+ * @param servo_pin Either 9 or 10,
+ * use the servo connector on the Motor Shield
+ */
 void RobotPickUp::SetPins(byte servo_pin) {
 	servo.attach(servo_pin);
 }
 
+/**
+ * @brief Sweeps from current angle,
+ * to the angle passed
+ *
+ * @param to_angle
+ */
 void RobotPickUp::Sweep(int to_angle) {
 	if (angle > to_angle) {
 		while (angle > to_angle) {
@@ -23,12 +35,21 @@ void RobotPickUp::Sweep(int to_angle) {
 	}
 }
 
+/**
+ * @brief Sets initial angle
+ *
+ * @param angle_inp
+ */
 void RobotPickUp::SetInitalAngle(int angle_inp) {
 	angle = angle_inp;
 	servo.write(angle);
 	delay(30);
 }
 
+/**
+ * @brief Runs a basic sweep test
+ *
+ */
 void RobotPickUp::SweepTest() {
 	int pos;
 	for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees

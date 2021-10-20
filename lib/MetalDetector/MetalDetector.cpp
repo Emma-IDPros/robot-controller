@@ -1,5 +1,13 @@
 #include <MetalDetector.h>
 
+/**
+ * @brief Sets the pins
+ *
+ * @param pin_pulse DIGITAL
+ * @param pin_cap ANALOGUE
+ * @param pin_LED1 DIGITAL
+ * @param pin_LED2 DIGITAL
+ */
 void RobotMetalDetector::SetPins(byte pin_pulse, byte pin_cap = 1, byte pin_LED1 = 12, byte pin_LED2 = 11) {
 	pin_pulse = pin_pulse;
 	pin_cap = pin_cap;
@@ -15,6 +23,12 @@ void RobotMetalDetector::SetPins(byte pin_pulse, byte pin_cap = 1, byte pin_LED1
 	digitalWrite(pin_LED2, LOW);
 }
 
+/**
+ * @brief Runs the metal detector
+ * and stores the detected state in the classes'
+ * attribute called detected
+ *
+ */
 void RobotMetalDetector::Detect() {
 	int minval = 1023;
 	int maxval = 0;
@@ -104,6 +118,11 @@ void RobotMetalDetector::Detect() {
 
 }
 
+/**
+ * @brief Debug func to print
+ * detected, count, freq
+ *
+ */
 void RobotMetalDetector::Debug() {
 	Serial.print(detected);
 	Serial.print(" ");
