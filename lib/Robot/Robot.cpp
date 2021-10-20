@@ -78,11 +78,14 @@ void Robot::StopAll() {
  *
  * @param clockwise
  * Direction of robot rotation (either true for clockwise or false for anticlockwise)
+ *
+ * @param rotating
+ * To run the function once when called
  */
 
-void Robot::Rotate(uint8_t angle, ROTATION rotation) {
+void Robot::Rotate(uint8_t angle, ROTATION rotation, ROTATE_ON rotating) {
 	rotation_time = 0;
-	if (angle == 90, rotation == CLOCKWISE) {
+	if (angle == 90, rotation == CLOCKWISE, rotating = ON) {
 		while (rotation_time < 160) {
 			Move(1, 255, FORWARD);
 			Move(2, 255, BACKWARD);
@@ -90,8 +93,9 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 			rotation_time++;
 		}
 		StopAll();
+		rotating = OFF;
 	}
-	else if (angle == 90, rotation == ANTICLOCKWISE) {
+	else if (angle == 90, rotation == ANTICLOCKWISE, rotating = ON) {
 		while (rotation_time < 160) {
 			Move(1, 255, BACKWARD);
 			Move(2, 255, FORWARD);
@@ -99,8 +103,9 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 			rotation_time++;
 		}
 		StopAll();
+		rotating = OFF;
 	}
-	else if (angle == 180, rotation == CLOCKWISE) {
+	else if (angle == 180, rotation == CLOCKWISE, rotating = ON) {
 		while (rotation_time < 320) {
 			Move(1, 255, FORWARD);
 			Move(2, 255, BACKWARD);
@@ -108,8 +113,9 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 			rotation_time++;
 		}
 		StopAll();
+		rotating = OFF;
 	}
-	else if (angle == 180, rotation == ANTICLOCKWISE) {
+	else if (angle == 180, rotation == ANTICLOCKWISE, rotating = ON) {
 		while (rotation_time < 320) {
 			Move(1, 255, BACKWARD);
 			Move(2, 255, FORWARD);
@@ -117,6 +123,7 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 			rotation_time++;
 		}
 		StopAll();
+		rotating = OFF;
 	}
 
 }

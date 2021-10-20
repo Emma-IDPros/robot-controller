@@ -52,9 +52,9 @@ void loop() {
   //   Bot.MoveAll(255, FORWARD);
   // // }
 
-  // Bot.Rotate(180, CLOCKWISE);
-  // BotIMU.ReadAcceleration();
-  // Serial.println(String(BotIMU.DetectRamp()));
+  Bot.Rotate(180, CLOCKWISE, ON);
+  BotIMU.ReadAcceleration();
+  Serial.println(String(BotIMU.DetectRamp()));
 
   // BotIMU.ReadAngles();
   // BotIMU.Integrate();
