@@ -1,7 +1,16 @@
 #include <Math.h>
 
-bool RobotMath::IsWithIn(float number, float comparator, float range) {
-	return (number > comparator - range) && (number < comparator + range);
+/**
+ * @brief Checks if a number is within a tolerance
+ *
+ * @param number
+ * @param comparator number to compare to
+ * @param tolerance
+ * @return true
+ * @return false
+ */
+bool RobotMath::IsWithIn(float number, float comparator, float tolerance) {
+	return (number > comparator - tolerance) && (number < comparator + tolerance);
 }
 
 /**
