@@ -6,7 +6,7 @@
 #include "MetalDetector.h"
 #include "LineSensor.h"
 #include "PickUp.h"
-//#define WIFI_DEBUG
+// #define WIFI_DEBUG
 
 
 #ifdef WIFI_DEBUG
@@ -46,25 +46,25 @@ void loop() {
   //   Serial.println("Setting init");
   // }
   // delay(800);
-  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-  // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
+  // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+  // // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
   float res = LineSensor.LineFollowSense();
   Serial.println(String(res));
 
-  // float ir_distance = Sensors.A21.GetDistance();
-  // Serial.println(String(ir_distance));
+  // // float ir_distance = Sensors.A21.GetDistance();
+  // // Serial.println(String(ir_distance));
 
-  if (ultrasound_distance < 25) {
-    Bot.StopAll();
-    // ultrasound should only detect a wall so, move the robot away
-    Bot.MoveAll(255, BACKWARD);
-    delay(1000);
-    Bot.Rotate(90, CLOCKWISE);
-  }
-  else {
-    Bot.MoveAll(255, FORWARD);
-  }
+  // if (ultrasound_distance < 25) {
+  //   Bot.StopAll();
+  //   // ultrasound should only detect a wall so, move the robot away
+  //   Bot.MoveAll(255, BACKWARD);
+  //   delay(1000);
+  //   Bot.Rotate(90, CLOCKWISE);
+  // }
+  // else {
+  //   Bot.MoveAll(255, FORWARD);
+  // }
 
   // line follower (proportional control)
   // need to get the front line sensor to work in tandem

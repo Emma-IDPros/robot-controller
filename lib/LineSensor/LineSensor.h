@@ -8,7 +8,7 @@ public:
 	bool Detect();
 	float LineFollowSense();
 private:
-	const byte line_pin_sense = 0;
+	const byte line_pin_sense = 2;
 	const byte line_detect_pin = 7;
 	int centre_line_val = 461;
 	int max_line_val = 792;
