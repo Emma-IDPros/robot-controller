@@ -89,7 +89,7 @@ void loop() {
   }
 
   */
-  LineSensor.FollowLine();
+  LineSensor.FollowLine(Bot);
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
