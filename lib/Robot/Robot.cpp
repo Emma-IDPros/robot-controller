@@ -82,41 +82,46 @@ void Robot::StopAll() {
 
 void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 	rotation_time = 0;
-	if (angle == 90, rotation == CLOCKWISE) {
-		while (rotation_time < 160) {
-			Move(1, 255, BACKWARD);
-			Move(2, 255, FORWARD);
-			delay(10);
-			rotation_time++;
+
+	if (angle == 90){
+		if (rotation == CLOCKWISE) {
+			while (rotation_time < 160) {
+				Move(1, 255, BACKWARD);
+				Move(2, 255, FORWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
 		}
-		StopAll();
+		else {
+			while (rotation_time < 160) {
+				Move(1, 255, FORWARD);
+				Move(2, 255, BACKWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
+		}
 	}
-	else if (angle == 90, rotation == ANTICLOCKWISE) {
-		while (rotation_time < 160) {
-			Move(1, 255, FORWARD);
-			Move(2, 255, BACKWARD);
-			delay(10);
-			rotation_time++;
+	else if (angle == 180){
+		if (rotation == CLOCKWISE) {
+			while (rotation_time < 320) {
+				Move(1, 255, BACKWARD);
+				Move(2, 255, FORWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
 		}
-		StopAll();
-	}
-	else if (angle == 180, rotation == CLOCKWISE) {
-		while (rotation_time < 320) {
-			Move(1, 255, BACKWARD);
-			Move(2, 255, FORWARD);
-			delay(10);
-			rotation_time++;
+		else {
+			while (rotation_time < 320) {
+				Move(1, 255, FORWARD);
+				Move(2, 255, BACKWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
 		}
-		StopAll();
-	}
-	else if (angle == 180, rotation == ANTICLOCKWISE) {
-		while (rotation_time < 320) {
-			Move(1, 255, FORWARD);
-			Move(2, 255, BACKWARD);
-			delay(10);
-			rotation_time++;
-		}
-		StopAll();
 	}
 }
 /**
