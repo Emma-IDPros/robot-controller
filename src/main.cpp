@@ -89,17 +89,7 @@ void loop() {
   }
 
   */
-  if (LineSensor.LineFollowSense() <= -0.5) {
-    Bot.Move(2, 255, FORWARD);
-    Bot.Move(1, 125, FORWARD);
-  }
-  else if (LineSensor.LineFollowSense() >= 0.5) {
-    Bot.Move(1, 255, FORWARD);
-    Bot.Move(2, 125, FORWARD);
-  }
-  else {
-    Bot.MoveAll(255, FORWARD);
-  }
+  LineSensor.FollowLine();
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
