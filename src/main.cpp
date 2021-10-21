@@ -37,9 +37,11 @@ void setup() {
 #endif
 
 }
-long int i;
+
 void loop() {
-  i++;
+  // delay(300);
+  BotIMU.ReadAngles();
+  Serial.println(String(BotIMU.pitch) + " " + String(BotIMU.roll));
   // if (i == 1) {
   //   // PickUp.SetInitalAngle(0);
   //   PickUp.SweepTest();
@@ -49,8 +51,8 @@ void loop() {
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
-  float res = LineSensor.LineFollowSense();
-  Serial.println(String(res));
+  // float res = LineSensor.LineFollowSense();
+  // Serial.println(String(res));
 
   // // float ir_distance = Sensors.A21.GetDistance();
   // // Serial.println(String(ir_distance));
@@ -89,17 +91,17 @@ void loop() {
   }
 
   */
-  if (LineSensor.LineFollowSense() <= -0.5) {
-    Bot.Move(2, 255, FORWARD);
-    Bot.Move(1, 125, FORWARD);
-  }
-  else if (LineSensor.LineFollowSense() >= 0.5) {
-    Bot.Move(1, 255, FORWARD);
-    Bot.Move(2, 125, FORWARD);
-  }
-  else {
-    Bot.MoveAll(255, FORWARD);
-  }
+  // if (LineSensor.LineFollowSense() <= -0.5) {
+  //   Bot.Move(2, 255, FORWARD);
+  //   Bot.Move(1, 125, FORWARD);
+  // }
+  // else if (LineSensor.LineFollowSense() >= 0.5) {
+  //   Bot.Move(1, 255, FORWARD);
+  //   Bot.Move(2, 125, FORWARD);
+  // }
+  // else {
+  //   Bot.MoveAll(255, FORWARD);
+  // }
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));

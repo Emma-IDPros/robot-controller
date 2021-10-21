@@ -1,6 +1,7 @@
 #include <IMU.h>
 #include <Arduino_LSM6DS3.h>
 #include <RobotMath.h>
+#define SAMPLE_RATE 10
 
 /**
  * @brief Reads the acceleration from the IMU and stores it in the attributes
@@ -37,19 +38,23 @@ RAMP_DIRECTION RobotIMU::DetectRamp() {
 
 
 void RobotIMU::ReadAngles() {
-	if (IMU.accelerationAvailable()) {
-		IMU.readAcceleration(ax, ay, az);
+	if (millis() - prevMilliSeconds >= 1000 / SAMPLE_RATE) {
+
+
+		if (IMU.accelerationAvailable()) {
+			IMU.readAcceleration(ax, ay, az);
+		}
+		if (IMU.gyroscopeAvailable()) {
+			IMU.readGyroscope(gx, gy, gz);
+		}
+
+		filter.updateIMU(gx, gy, gz, ax, ay, az);
+
+		roll = filter.getRoll();
+		pitch = filter.getPitch();
+		yaw = filter.getYaw();
+		prevMilliSeconds = millis();
 	}
-	if (IMU.gyroscopeAvailable()) {
-		IMU.readGyroscope(gx, gy, gz);
-	}
-
-	filter.updateIMU(gx, gy, gz, ax, ay, az);
-
-	roll = filter.getRoll();
-	pitch = filter.getPitch();
-	yaw = filter.getYaw();
-
 }
 
 /**
@@ -60,7 +65,7 @@ void RobotIMU::Begin() {
 		Serial.println("Failed to initialize IMU!");
 		while (1);
 	}
-	filter.begin(10);
+	filter.begin(SAMPLE_RATE);
 }
 /**
  * @brief Attempt at performing numerical intergration of acceleration to give
