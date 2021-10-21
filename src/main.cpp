@@ -49,8 +49,8 @@ void loop() {
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
-  // // float res = LineSensor.LineFollowSense();
-  // // Serial.println(String(res));
+  float res = LineSensor.LineFollowSense();
+  Serial.println(String(res));
 
   // // float ir_distance = Sensors.A21.GetDistance();
   // // Serial.println(String(ir_distance));
