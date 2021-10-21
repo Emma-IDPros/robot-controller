@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino_LSM6DS3.h>
+#include <MadgwickAHRS.h>
 // #include <SensorFusion.h>
 
 enum RAMP_DIRECTION { UP, DOWN, FLAT };
@@ -20,7 +21,7 @@ public:
 	// positon
 	float x, y, z;
 	void ReadAcceleration();
-	// void ReadAngles();
+	void ReadAngles();
 	void Begin();
 	void Integrate();
 	RAMP_DIRECTION DetectRamp();
@@ -32,6 +33,7 @@ private:
 	float prev_ax, prev_ay, prev_az;
 	float prev_vx, prev_vy, prev_vz;
 	float deltat;
+	Madgwick filter;
 	// SF fusion;
 
 

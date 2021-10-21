@@ -36,25 +36,21 @@ RAMP_DIRECTION RobotIMU::DetectRamp() {
 }
 
 
-// void RobotIMU::ReadAngles() {
-// 	if (IMU.accelerationAvailable()) {
-// 		IMU.readAcceleration(ax, ay, az);
-// 	}
-// 	if (IMU.gyroscopeAvailable()) {
-// 		IMU.readGyroscope(gx, gy, gz);
-// 		gx *= 0.01745329251;
-// 		gy *= 0.01745329251;
-// 		gz *= 0.01745329251;
+void RobotIMU::ReadAngles() {
+	if (IMU.accelerationAvailable()) {
+		IMU.readAcceleration(ax, ay, az);
+	}
+	if (IMU.gyroscopeAvailable()) {
+		IMU.readGyroscope(gx, gy, gz);
+	}
 
-// 		// Serial.println(String(gx));
-// 	}
-// 	deltat = fusion.deltatUpdate(); //this have to be done before calling the fusion update
-// 	fusion.MahonyUpdate(gx, gy, gz, ax, ay, az, deltat);  //mahony is suggested if there isn't the mag and the mcu is slow
+	filter.updateIMU(gx, gy, gz, ax, ay, az);
 
-// 	pitch = fusion.getPitch();
-// 	roll = fusion.getRoll();    //you could also use getRollRadians() ecc
-// 	yaw = fusion.getYaw();
-// }
+	roll = filter.getRoll();
+	pitch = filter.getPitch();
+	yaw = filter.getYaw();
+
+}
 
 /**
  * @brief Begins the connection to the IMU
@@ -64,6 +60,7 @@ void RobotIMU::Begin() {
 		Serial.println("Failed to initialize IMU!");
 		while (1);
 	}
+	filter.begin(10);
 }
 /**
  * @brief Attempt at performing numerical intergration of acceleration to give
