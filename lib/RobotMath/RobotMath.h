@@ -6,4 +6,4 @@ public:
 	bool IsWithIn(float number, float comparator, float tolerance);
 };
 
-extern RobotMath Math;
+extern RobotMath RobotMath;
