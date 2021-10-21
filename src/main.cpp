@@ -40,12 +40,12 @@ void setup() {
 long int i;
 void loop() {
   i++;
-  if (i == 1) {
-    // PickUp.SetInitalAngle(0);
-    PickUp.SweepTest();
-    Serial.println("Setting init");
-  }
-  delay(800);
+  // if (i == 1) {
+  //   // PickUp.SetInitalAngle(0);
+  //   PickUp.SweepTest();
+  //   Serial.println("Setting init");
+  // }
+  // delay(800);
   float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
@@ -67,8 +67,8 @@ void loop() {
 
 
 
-  BotIMU.ReadAcceleration();
-  Serial.println(String(BotIMU.DetectRamp()));
+  // BotIMU.ReadAcceleration();
+  // Serial.println(String(BotIMU.DetectRamp()));
 
   // BotIMU.ReadAngles();
   // BotIMU.Integrate();
