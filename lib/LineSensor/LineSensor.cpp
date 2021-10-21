@@ -1,4 +1,7 @@
 #include <LineSensor.h>
+#include <Robot.h>
+
+Robot Bot;
 
 /**
  * @brief Set the pins for the line sensor
@@ -61,4 +64,20 @@ float RobotLineSensor::LineFollowSense() {
 		line_val = 0;
 	}
 	return line_val;
+}
+
+void RobotLineSensor::FollowLine() {
+	if (LineFollowSense() < 0) {
+		rot_speed = LineFollowSense() * 255 + 255;
+		Bot.Move(2, 255, FORWARD);
+    	Bot.Move(1, rot_speed, FORWARD);
+  	}
+  	else if (LineFollowSense() > 0) {
+		rot_speed = -LineFollowSense() * 255 + 255;
+    	Bot.Move(1, 255, FORWARD);
+    	Bot.Move(2, rot_speed, FORWARD);
+  	}
+  	else {
+    	Bot.MoveAll(255, FORWARD);
+  	}
 }
