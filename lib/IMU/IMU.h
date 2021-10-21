@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino_LSM6DS3.h>
+#include <math.h>
 #include <MadgwickAHRS.h>
 // #include <SensorFusion.h>
 

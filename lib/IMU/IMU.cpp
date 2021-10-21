@@ -1,6 +1,6 @@
 #include <IMU.h>
 #include <Arduino_LSM6DS3.h>
-#include <Math.h>
+#include <RobotMath.h>
 
 /**
  * @brief Reads the acceleration from the IMU and stores it in the attributes
@@ -23,10 +23,10 @@ void RobotIMU::ReadAcceleration() {
  * @return RAMP_DIRECTION
  */
 RAMP_DIRECTION RobotIMU::DetectRamp() {
-	if (Math.IsWithIn(ax, -3, 0.3) && Math.IsWithIn(az, 9.3, 0.3)) {
+	if (RobotMath.IsWithIn(ax, -3, 0.3) && RobotMath.IsWithIn(az, 9.3, 0.3)) {
 		return UP;
 	}
-	else if (Math.IsWithIn(ax, 3, 0.3) && Math.IsWithIn(az, 9.3, 0.3)) {
+	else if (RobotMath.IsWithIn(ax, 3, 0.3) && RobotMath.IsWithIn(az, 9.3, 0.3)) {
 		return DOWN;
 	}
 	else {
@@ -71,12 +71,12 @@ void RobotIMU::Integrate() {
 	// cumulative trapezium
 	double delta_t = (millis() - prevMilliSeconds) / 1000;
 	if (abs(ax) > 0.03) { // acceleration threshold
-		vx += Math.TrapeziumArea(prev_ax, ax, delta_t);
-		vy += Math.TrapeziumArea(prev_ay, ay, delta_t);
-		vz += Math.TrapeziumArea(prev_az, az, delta_t);
-		x += Math.TrapeziumArea(prev_vx, vx, delta_t);
-		y += Math.TrapeziumArea(prev_vy, vy, delta_t);
-		z += Math.TrapeziumArea(prev_vz, vz, delta_t);
+		vx += RobotMath.TrapeziumArea(prev_ax, ax, delta_t);
+		vy += RobotMath.TrapeziumArea(prev_ay, ay, delta_t);
+		vz += RobotMath.TrapeziumArea(prev_az, az, delta_t);
+		x += RobotMath.TrapeziumArea(prev_vx, vx, delta_t);
+		y += RobotMath.TrapeziumArea(prev_vy, vy, delta_t);
+		z += RobotMath.TrapeziumArea(prev_vz, vz, delta_t);
 
 		prev_ax = ax; prev_ay = ay; prev_az = az;
 		prev_vx = vx; prev_vy = vy; prev_vz = vz;
