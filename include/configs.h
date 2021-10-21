@@ -9,4 +9,4 @@ extern const byte MD_pin_LED1 = 12;
 extern const byte MD_pin_LED2 = 11;
 extern const byte line_pin_sense = 2; // analogue
 extern const byte line_detect_pin = 7; // digital
-extern const byte PU_servo_pon = 10;
+extern const byte PU_servo_pin = 10;
