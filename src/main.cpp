@@ -55,17 +55,51 @@ void loop() {
   // float ir_distance = Sensors.A21.GetDistance();
   // Serial.println(String(ir_distance));
 
-  if (ultrasound_distance < 20) {
+  if (ultrasound_distance < 25) {
     Bot.StopAll();
-    Bot.Rotate(180, CLOCKWISE);
+    // ultrasound should only detect a wall so, move the robot away
+    Bot.MoveAll(255, BACKWARD);
+    delay(1000);
+    Bot.Rotate(90, CLOCKWISE);
   }
   else {
     Bot.MoveAll(255, FORWARD);
   }
 
-  //Bot.Rotate(180, CLOCKWISE);
+  // line follower (proportional control)
+  // need to get the front line sensor to work in tandem
+  /*
+  if (front line sensor = on line && -0.5 < LineSensor.LineFollowSense < 0.5){
+    robot is on junction
+    if (carrying box = true){
+      if (box = metal){
+        Bot.Rotate into red box
+      }
+      else {
+        Bot.Rotate into blue box
+      }
+    }
+    else {
+      Bot.MoveAll();
+    }
+  }
+  else if (front line sensor = off line && -0.5 < LineSensor.LineFollowSense < 0.5) {
+    Bot.StopAll();
+    run IR sensor and sweep
+  }
 
-
+  */
+  if (LineSensor.LineFollowSense <= -0.5) {
+    Bot.Move(2, 255, FORWARD);
+    Bot.Move(1, 125, FORWARD);
+  }
+  else if (LineSensor.LineFollowSense >= 0.5) {
+    Bot.Move(1, 255, FORWARD);
+    Bot.Move(2, 125, FORWARD);
+  }
+  else {
+    Bot.MoveAll(255, FORWARD);
+  }
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
