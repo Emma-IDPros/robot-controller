@@ -1,5 +1,7 @@
 #pragma once
 #include <Arduino.h>
+#include <Robot.h>
+
 
 class RobotLineSensor {
 public:
@@ -7,11 +9,10 @@ public:
 	void SetThresholdValues(int centre_line_val, int max_line_val);
 	bool Detect();
 	float LineFollowSense();
-	void FollowLine();
 private:
 	const byte line_pin_sense = 2;
 	const byte line_detect_pin = 7;
 	int centre_line_val = 461;
 	int max_line_val = 792;
-	float rot_speed;
+
 };
