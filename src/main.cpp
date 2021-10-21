@@ -89,11 +89,11 @@ void loop() {
   }
 
   */
-  if (LineSensor.LineFollowSense <= -0.5) {
+  if (LineSensor.LineFollowSense() <= -0.5) {
     Bot.Move(2, 255, FORWARD);
     Bot.Move(1, 125, FORWARD);
   }
-  else if (LineSensor.LineFollowSense >= 0.5) {
+  else if (LineSensor.LineFollowSense() >= 0.5) {
     Bot.Move(1, 255, FORWARD);
     Bot.Move(2, 125, FORWARD);
   }
