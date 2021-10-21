@@ -6,6 +6,7 @@
 #include "MetalDetector.h"
 #include "LineSensor.h"
 #include "PickUp.h"
+#include "RobotDecisions.h"
 // #define WIFI_DEBUG
 
 
@@ -20,6 +21,7 @@ RobotIMU BotIMU;
 RobotMetalDetector MetalDetector;
 RobotLineSensor LineSensor;
 RobotPickUp PickUp;
+RobotDecisions Decisions;
 
 void setup() {
 
@@ -89,7 +91,8 @@ void loop() {
   }
 
   */
-  LineSensor.FollowLine(Bot);
+ 
+  Decisions.FollowLine(Bot, LineSensor);
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
