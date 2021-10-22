@@ -12,7 +12,7 @@ void RobotDecisions::FollowLine(Robot Bot, RobotLineSensor LineSensor) {
     	Bot.Move(LEFT, 200, FORWARD);
     	Bot.Move(RIGHT, rot_speed, FORWARD);
   	}
-  	else if (LineSensor.LineFollowSense() <= 0.5 && LineSensor.LineFollowSense() >= -0.5) {
+  	else {
     	Bot.MoveAll(255, FORWARD);
   	}
 }
