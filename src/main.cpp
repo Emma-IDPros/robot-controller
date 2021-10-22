@@ -53,8 +53,8 @@ void loop() {
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
-  float res = LineSensor.LineFollowSense();
-  Serial.println(String(res));
+  // float res = LineSensor.LineFollowSense();
+  // Serial.println(String(res));
 
   // // float ir_distance = Sensors.A21.GetDistance();
   // // Serial.println(String(ir_distance));
@@ -67,7 +67,7 @@ void loop() {
   //   Bot.Rotate(90, CLOCKWISE);
   // }
   // else {
-  //   Bot.MoveAll(255, FORWARD);
+  Bot.MoveAll(255, FORWARD);
   // }
 
   // line follower (proportional control)
@@ -94,7 +94,7 @@ void loop() {
 
   */
 
-  Decisions.FollowLine(Bot, LineSensor);
+  // Decisions.FollowLine(Bot, LineSensor);
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
