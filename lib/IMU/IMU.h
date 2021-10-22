@@ -4,7 +4,7 @@
 #include <MadgwickAHRS.h>
 // #include <SensorFusion.h>
 
-enum ARENA_SIDE { BEGGINING, END };
+enum ARENA_SIDE { BEGINNING, END };
 enum RAMP_DIRECTION { UP, DOWN, FLAT };
 
 /**
@@ -18,7 +18,7 @@ public:
 	float gx, gy, gz;
 	// angles
 	float pitch, yaw, roll;
-	ARENA_SIDE arena_side = BEGGINING;
+	ARENA_SIDE arena_side = BEGINNING;
 	void UpdateArenaSide();
 	void ReadAngles();
 	void Begin();
