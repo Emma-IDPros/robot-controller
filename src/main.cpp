@@ -43,7 +43,8 @@ void setup() {
 void loop() {
   // delay(300);
   BotIMU.ReadAngles();
-  Serial.println(BotIMU.DetectRamp());
+  BotIMU.UpdateArenaSide();
+  Serial.println(BotIMU.arena_side);
   // if (i == 1) {
   //   // PickUp.SetInitalAngle(0);
   //   PickUp.SweepTest();

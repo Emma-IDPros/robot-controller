@@ -27,12 +27,13 @@ RAMP_DIRECTION RobotIMU::DetectRamp() {
 void RobotIMU::UpdateArenaSide() {
 	RAMP_DIRECTION ramp_dir = DetectRamp();
 
-	if (arena_side == BEGGINING && ramp_dir == DOWN) {
+	if (arena_side == BEGGINING && ramp_dir == DOWN && prev_ramp == FLAT) {
 		arena_side = END;
 	}
-	if (arena_side == END && ramp_dir == DOWN) {
+	else if (arena_side == END && ramp_dir == DOWN && prev_ramp == FLAT) {
 		arena_side = BEGGINING;
 	}
+	prev_ramp = ramp_dir;
 }
 
 
