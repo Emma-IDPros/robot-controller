@@ -21,16 +21,16 @@ void Robot::MotorShieldTest() {
 /**
  * @brief Makes a specifc motor move
  *
- * @param motor_number
- * The motor that you want to move (1 or 2)
+ * @param motor_side
+ * The motor that you want to move (LEFT or RIGHT)
  * @param speed
  * 8 bit int (0-255) to set the speed of rotation
  * @param DIRECTION
  * Direction of rotation.
  * Either FORWARDS or BACKWARDS
  */
-void Robot::Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION) {
-	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
+void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
+	Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
 	motor->setSpeed(speed);
 	motor->run(DIRECTION);
 };
@@ -45,10 +45,10 @@ void Robot::Move(uint8_t motor_number, uint8_t speed, uint8_t DIRECTION) {
  * Either FORWARDS or BACKWARDS
  */
 void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
-	Motor1->setSpeed(speed);
-	Motor1->run(DIRECTION);
-	Motor2->setSpeed(speed);
-	Motor2->run(DIRECTION);
+	MotorRight->setSpeed(speed);
+	MotorRight->run(DIRECTION);
+	MotorLeft->setSpeed(speed);
+	MotorLeft->run(DIRECTION);
 };
 
 /**
@@ -57,8 +57,8 @@ void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
  * @param motor_number
  * The motor that you want to stop (1 or 2)
  */
-void Robot::Stop(uint8_t motor_number) {
-	Adafruit_DCMotor* motor = motor_from_motor_number(motor_number);
+void Robot::Stop(MOTOR motor_side) {
+	Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
 	motor->run(RELEASE);
 };
 
@@ -66,8 +66,8 @@ void Robot::Stop(uint8_t motor_number) {
  * @brief Stops all motors from moving
  */
 void Robot::StopAll() {
-	Motor1->run(RELEASE);
-	Motor2->run(RELEASE);
+	MotorLeft->run(RELEASE);
+	MotorRight->run(RELEASE);
 };
 
 /**
@@ -85,8 +85,8 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 	if (angle == 90) {
 		if (rotation == CLOCKWISE) {
 			while (rotation_time < 160) {
-				Move(1, 255, BACKWARD);
-				Move(2, 255, FORWARD);
+				Move(RIGHT, 255, BACKWARD);
+				Move(LEFT, 255, FORWARD);
 				delay(10);
 				rotation_time++;
 			}
@@ -94,8 +94,8 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 		}
 		else {
 			while (rotation_time < 160) {
-				Move(1, 255, FORWARD);
-				Move(2, 255, BACKWARD);
+				Move(RIGHT, 255, FORWARD);
+				Move(LEFT, 255, BACKWARD);
 				delay(10);
 				rotation_time++;
 			}
@@ -105,8 +105,8 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 	else if (angle == 180) {
 		if (rotation == CLOCKWISE) {
 			while (rotation_time < 320) {
-				Move(1, 255, BACKWARD);
-				Move(2, 255, FORWARD);
+				Move(RIGHT, 255, BACKWARD);
+				Move(LEFT, 255, FORWARD);
 				delay(10);
 				rotation_time++;
 			}
@@ -114,8 +114,8 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
 		}
 		else {
 			while (rotation_time < 320) {
-				Move(1, 255, FORWARD);
-				Move(2, 255, BACKWARD);
+				Move(RIGHT, 255, FORWARD);
+				Move(LEFT, 255, BACKWARD);
 				delay(10);
 				rotation_time++;
 			}
@@ -131,14 +131,14 @@ void Robot::Rotate(uint8_t angle, ROTATION rotation) {
  * @return Adafruit_DCMotor*
  * Returns a pointer to that specific motor
  */
-Adafruit_DCMotor* Robot::motor_from_motor_number(uint8_t motor_number) {
-	switch (motor_number)
+Adafruit_DCMotor* Robot::motor_from_motor_number(MOTOR motor) {
+	switch (motor)
 	{
-	case 1:
-		return Motor1;
+	case LEFT:
+		return MotorLeft;
 		break;
-	case 2:
-		return Motor2;
+	case RIGHT:
+		return MotorRight;
 		break;
 
 	default:
