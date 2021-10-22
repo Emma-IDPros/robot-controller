@@ -4,7 +4,7 @@
 #include <MadgwickAHRS.h>
 // #include <SensorFusion.h>
 
-enum AREA_SIDE { BEGGINING, END };
+enum ARENA_SIDE { BEGGINING, END };
 enum RAMP_DIRECTION { UP, DOWN, FLAT };
 
 /**
@@ -18,26 +18,13 @@ public:
 	float gx, gy, gz;
 	// angles
 	float pitch, yaw, roll;
-	// velocity
-	float vx, vy, vz;
-	// positon
-	float x, y, z;
-	void ReadAcceleration();
+	ARENA_SIDE arena_side = BEGGINING;
+	void UpdateArenaSide();
 	void ReadAngles();
 	void Begin();
-	void Integrate();
 	RAMP_DIRECTION DetectRamp();
-	void VerletInt();
-	float new_position, prev_position, position, velocity;
 
 private:
 	float prevMilliSeconds = millis();
-	float prev_ax, prev_ay, prev_az;
-	float prev_vx, prev_vy, prev_vz;
-	float deltat;
 	Madgwick filter;
-	// SF fusion;
-
-
-	float counter;
 };
