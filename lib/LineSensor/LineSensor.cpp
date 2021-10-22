@@ -42,6 +42,7 @@ bool RobotLineSensor::Detect() {
  */
 float RobotLineSensor::LineFollowSense() {
 	float line_val = analogRead(line_pin_sense);
+	// Serial.println(String(line_val));
 	int turn = 0;
 	line_val -= centre_line_val;
 	if (line_val < 0) {//go right
