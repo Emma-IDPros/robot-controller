@@ -42,8 +42,8 @@ void setup() {
 
 void loop() {
   // delay(300);
-  // BotIMU.ReadAngles();
-  // Serial.println(String(BotIMU.pitch) + " " + String(BotIMU.roll));
+  BotIMU.ReadAngles();
+  Serial.println(BotIMU.DetectRamp());
   // if (i == 1) {
   //   // PickUp.SetInitalAngle(0);
   //   PickUp.SweepTest();
@@ -53,8 +53,8 @@ void loop() {
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
   // // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
 
-  // float res = LineSensor.LineFollowSense();
-  // Serial.println(String(res) + " " + String(LineSensor.Detect()));
+  // float line_sense = LineSensor.LineFollowSense();
+  // bool line_detect = LineSensor.Detect();
 
   // // float ir_distance = Sensors.A21.GetDistance();
   // // Serial.println(String(ir_distance));
@@ -94,7 +94,7 @@ void loop() {
 
   */
 
-  Decisions.FollowLine(Bot, LineSensor);
+  // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
   // BotIMU.ReadAcceleration();
   // Serial.println(String(BotIMU.DetectRamp()));
@@ -115,7 +115,7 @@ void loop() {
   if (WiFiComm.wl_status == WL_CONNECTED) {
     // WiFiComm.Message(String(BotI?MU.DetectRamp()));
 
-    WiFiComm.Message(String(ultrasound_distance));
+    // WiFiComm.Message(String(ultrasound_distance));
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "vx = " + String(BotIMU.vx) + " ms^-1, " + "x = " + String(BotIMU.x) + " m, ");
     // WiFiComm.Message("ax = " + String(BotIMU.ax) + " ms^-2, " + "ay = " + String(BotIMU.ay) + " ms^-2, " + "az = " + String(BotIMU.az) + " ms^-2, ");
     // WiFiComm.SendCoords(BotIMU.ax, BotIMU.ay);

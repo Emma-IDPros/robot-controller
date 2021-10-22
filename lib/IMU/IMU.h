@@ -4,6 +4,7 @@
 #include <MadgwickAHRS.h>
 // #include <SensorFusion.h>
 
+enum AREA_SIDE { BEGGINING, END };
 enum RAMP_DIRECTION { UP, DOWN, FLAT };
 
 /**
