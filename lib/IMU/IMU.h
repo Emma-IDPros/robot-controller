@@ -26,6 +26,6 @@ public:
 
 private:
 	float prevMilliSeconds = millis();
-	RAMP_DIRECTION prev_ramp = FLAT;
+	RAMP_DIRECTION prev_ramp_dir = FLAT;
 	Madgwick filter;
 };
