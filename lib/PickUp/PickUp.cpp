@@ -22,7 +22,7 @@ void RobotPickUp::Sweep(int to_angle) {
 			servo.write(angle);
 			Serial.println(angle);
 			angle--;
-			delay(15);
+			delay(30);
 		}
 	}
 	else {
@@ -30,7 +30,7 @@ void RobotPickUp::Sweep(int to_angle) {
 			servo.write(angle);
 			Serial.println(angle);
 			angle++;
-			delay(15);
+			delay(30);
 		}
 	}
 }
@@ -43,7 +43,8 @@ void RobotPickUp::Sweep(int to_angle) {
 void RobotPickUp::SetInitalAngle(int angle_inp) {
 	angle = angle_inp;
 	servo.write(angle);
-	delay(30);
+	delay(300);
+	inital_angle_set = true;
 }
 
 /**

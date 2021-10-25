@@ -46,9 +46,11 @@ void loop() {
   // BotIMU.UpdateArenaSide();
   // Serial.println(BotIMU.arena_side);
   // if (i == 1) {
-  //   // PickUp.SetInitalAngle(0);
-  //   PickUp.SweepTest();
-  //   Serial.println("Setting init");
+  // if (!PickUp.inital_angle_set) { PickUp.SetInitalAngle(20); }
+  // else {
+  //   PickUp.Sweep(180);
+  // }
+  // Serial.println("Setting init");
   // }
   // delay(800);
   // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
@@ -99,7 +101,7 @@ void loop() {
 
 
 
-  Decisions.FollowLine(Bot, LineSensor);
+  // Decisions.FollowLine(Bot, LineSensor);
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
   // BotIMU.ReadAcceleration();
