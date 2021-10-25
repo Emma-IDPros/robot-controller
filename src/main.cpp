@@ -42,9 +42,9 @@ void setup() {
 
 void loop() {
   // delay(300);
-  BotIMU.ReadAngles();
-  BotIMU.UpdateArenaSide();
-  Serial.println(BotIMU.arena_side);
+  // BotIMU.ReadAngles();
+  // BotIMU.UpdateArenaSide();
+  // Serial.println(BotIMU.arena_side);
   // if (i == 1) {
   //   // PickUp.SetInitalAngle(0);
   //   PickUp.SweepTest();
@@ -56,6 +56,8 @@ void loop() {
 
   // float line_sense = LineSensor.LineFollowSense();
   // bool line_detect = LineSensor.Detect();
+
+  // Serial.println(String(line_detect) + " " + String(line_sense));
 
   // // float ir_distance = Sensors.A21.GetDistance();
   // // Serial.println(String(ir_distance));
@@ -95,6 +97,9 @@ void loop() {
 
   */
 
+
+
+  Decisions.FollowLine(Bot, LineSensor);
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
   // BotIMU.ReadAcceleration();
