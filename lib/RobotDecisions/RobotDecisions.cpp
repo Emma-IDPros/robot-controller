@@ -49,3 +49,7 @@ void RobotDecisions::FollowLineWithWiFi(Robot Bot, RobotLineSensor LineSensor, W
 		// Bot.Move(LEFT, 100, FORWARD);
 	}
 }
+
+void RobotDecisions::FollowV2(Robot Bot, RobotLineSensor LineSensor){
+	
+}

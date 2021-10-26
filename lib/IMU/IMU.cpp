@@ -2,7 +2,7 @@
 #include <Arduino_LSM6DS3.h>
 #include <RobotMath.h>
 #define SAMPLE_RATE 10
-int THRESHOLD_ANGLE = 10;
+int THRESHOLD_ANGLE = 20;
 
 /**
  * @brief Uses the IMU acceleration values to

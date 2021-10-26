@@ -42,9 +42,9 @@ void setup() {
 
 void loop() {
   // delay(300);
-  // BotIMU.ReadAngles();
-  // BotIMU.UpdateArenaSide();
-  // Serial.println(BotIMU.arena_side);
+  BotIMU.ReadAngles();
+  BotIMU.UpdateArenaSide();
+  Serial.println(BotIMU.arena_side);
   // if (i == 1) {
   // if (!PickUp.inital_angle_set) { PickUp.SetInitalAngle(20); }
   // else {
