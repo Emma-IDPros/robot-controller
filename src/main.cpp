@@ -45,16 +45,7 @@ void loop() {
   BotIMU.ReadAngles();
   BotIMU.UpdateArenaSide();
   Serial.println(BotIMU.arena_side);
-  // if (i == 1) {
-  // if (!PickUp.inital_angle_set) { PickUp.SetInitalAngle(20); }
-  // else {
-  //   PickUp.Sweep(180);
-  // }
-  // Serial.println("Setting init");
-  // }
-  // delay(800);
-  // float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-  // // Serial.println("Ultrasound Distance: " + String(ultrasound_distance));
+  
 
   float line_sense = LineSensor.LineFollowSense();
   bool line_detect = LineSensor.Detect();
