@@ -41,12 +41,12 @@ void setup() {
 }
 
 void loop() {
-  float line_sense = LineSensor.LineFollowSense();
-  bool line_detect = LineSensor.Detect();
+  // float line_sense = LineSensor.LineFollowSense();
+  // bool line_detect = LineSensor.Detect();
 
-  Serial.println(String(line_detect) + " " + String(line_sense));
+  // Serial.println(String(line_detect) + " " + String(line_sense));
 
-  // Decisions.FollowLine(Bot, LineSensor);
+  Decisions.FollowLine(Bot, LineSensor);
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
 
@@ -55,6 +55,6 @@ void loop() {
 
     // WiFiComm.Message(String(ultrasound_distance));
 
-}
+  }
 #endif
 }
