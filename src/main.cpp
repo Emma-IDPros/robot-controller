@@ -48,7 +48,7 @@ void loop() {
 
   // Serial.println(String(line_detect) + " " + String(line_sense));
 
-  Decisions.FollowLine(Bot, LineSensor);
+  Decisions.FollowLine(Bot, LineSensor, true);
   //Serial.println(String(analogRead(line_pin_sense)));
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
