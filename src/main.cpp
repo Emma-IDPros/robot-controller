@@ -35,6 +35,7 @@ void setup() {
 
   LineSensor.SetThresholdValues(253, 480);
 
+  PickUp.Sweep(180);  // initialise collection mechanism
 
 #ifdef WIFI_DEBUG
   WiFiComm.Connect();
@@ -56,6 +57,8 @@ void loop() {
   //float ultrasound_distance = Sensors.Ultrasound.GetDistance();
 
   // Serial.println("Ultrasound Dist: " + String(ultrasound_distance) + " IR_Sensor: " + String(ir_distance));
+
+  Decisions.BlockCollect(Bot, Sensors, PickUp, BotIMU);
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {

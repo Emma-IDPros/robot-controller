@@ -1,9 +1,12 @@
+#pragma once
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 #include <Robot.h>
+
+RobotLineSensor LineSensor;
 
 /**
  * @brief Runs the Adafruit Test Script for the
@@ -73,56 +76,42 @@ void Robot::StopAll() {
 /**
  * @brief moves motors at max speed in opposite directions to rotate
  *
- * @param angle
- * Angle either 90 degrees or 180 degrees
- *
  * @param clockwise
  * Direction of robot rotation (either true for clockwise or false for anticlockwise)
  */
-void Robot::Rotate(uint8_t angle, ROTATION rotation) {
-	rotation_time = 0;
 
-	if (angle == 90) {
-		if (rotation == CLOCKWISE) {
-			while (rotation_time < 160) {
-				Move(RIGHT, 255, BACKWARD);
-				Move(LEFT, 255, FORWARD);
-				delay(10);
-				rotation_time++;
-			}
-			StopAll();
+void Robot::Rotate(ROTATION rotation) {
+	rotation_time = 0;
+	if (rotation == CLOCKWISE){
+		while (rotation_time < 50){
+			Move(RIGHT, 255, BACKWARD);
+			Move(LEFT, 255, FORWARD);
+			delay(10);
+			rotation_time++;
 		}
-		else {
-			while (rotation_time < 160) {
-				Move(RIGHT, 255, FORWARD);
-				Move(LEFT, 255, BACKWARD);
-				delay(10);
-				rotation_time++;
-			}
-			StopAll();
+		while (LineSensor.Detect() == 0) {
+			Move(RIGHT, 255, BACKWARD);
+			Move(LEFT, 255, FORWARD);
+			delay(10);
 		}
+		StopAll();
 	}
-	else if (angle == 180) {
-		if (rotation == CLOCKWISE) {
-			while (rotation_time < 320) {
-				Move(RIGHT, 255, BACKWARD);
-				Move(LEFT, 255, FORWARD);
-				delay(10);
-				rotation_time++;
-			}
-			StopAll();
+	else {
+		while (rotation_time < 50){
+			Move(RIGHT, 255, FORWARD);
+			Move(LEFT, 255, BACKWARD);
+			delay(10);
+			rotation_time++;
 		}
-		else {
-			while (rotation_time < 320) {
-				Move(RIGHT, 255, FORWARD);
-				Move(LEFT, 255, BACKWARD);
-				delay(10);
-				rotation_time++;
-			}
-			StopAll();
+		while (LineSensor.Detect() == 0) {
+			Move(RIGHT, 255, FORWARD);
+			Move(LEFT, 255, BACKWARD);
+			delay(10);
 		}
+		StopAll();
 	}
 }
+
 /**
  * @brief Returns an Adafruit_DCMotor pointer given a motor number
  *

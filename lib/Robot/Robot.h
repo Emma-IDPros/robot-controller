@@ -4,6 +4,7 @@
 #include <SPI.h>
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
+#include <LineSensor.h>
 
 enum ROTATION { CLOCKWISE, ANTICLOCKWISE };
 enum MOTOR {LEFT, RIGHT};
@@ -21,7 +22,7 @@ public:
 	void MoveAll(uint8_t speed, uint8_t DIRECTION);
 	void Stop(MOTOR motor);
 	void StopAll();
-	void Rotate(uint8_t angle, ROTATION rotation);
+	void Rotate(ROTATION rotation);
 	float rotation_time;
 	static bool rotate_execute;
 	Adafruit_DCMotor* motor_from_motor_number(MOTOR motor);
