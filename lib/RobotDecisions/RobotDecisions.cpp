@@ -13,14 +13,14 @@ void RobotDecisions::FollowLine(Robot Bot, RobotLineSensor LineSensor) {
 		rot_speed = LineSensor.LineFollowSense() * SWING + (MAXSPEED - SWING);
 		Bot.Move(LEFT, int(rot_speed), FORWARD);
 		Bot.Move(RIGHT, (1 - DEADZONE) * MAXSPEED, FORWARD);
-		//Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT 200 RIGHT:" + String(rot_speed));
+		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT 200 RIGHT:" + String(rot_speed));
 		// Bot.Move(RIGHT, 100, FORWARD);
 	}
 	else if (LineSensor.LineFollowSense() > DEADZONE) {
 		rot_speed = (-LineSensor.LineFollowSense() * SWING) + (MAXSPEED - SWING);
 		Bot.Move(RIGHT, int(rot_speed), FORWARD);
 		Bot.Move(LEFT, (1 - DEADZONE) * MAXSPEED, FORWARD);
-		//Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT 200 LEFT:" + String(rot_speed));
+		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT 200 LEFT:" + String(rot_speed));
 
 		// Serial.println("LEFT " + String(rot_speed));
 		// Bot.Move(LEFT, 100, FORWARD);
