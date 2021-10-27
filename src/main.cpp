@@ -49,6 +49,10 @@ void loop() {
   Decisions.FollowLine(Bot, LineSensor);
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
+  float ir_distance = Sensors.A21.GetDistance();
+  float ultrasound_distance = Sensors.Ultrasound.GetDistance();
+
+  Serial.println("Ultrasound Dist: " + String(ultrasound_distance) + " IR_Sensor: " + String(ir_distance));
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
