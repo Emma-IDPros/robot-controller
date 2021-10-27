@@ -1,6 +1,6 @@
 #pragma once
 extern const byte IR_A02pin = 0;//must be analog
-extern const byte IR_A21pin = 0;//must be analog
+extern const byte IR_A21pin = 3;//must be analog
 extern const byte US_pinTrig = 3;//must be digital
 extern const byte US_pinEcho = 2;//must be digital
 extern const byte MD_pin_pulse = A0;

@@ -19,9 +19,9 @@ void RobotLineSensor::SetPins(byte line_pin_sense, byte line_detect_pin) {
  * @param centre_line_val default 461
  * @param max_line_val default 792
  */
-void RobotLineSensor::SetThresholdValues(int centre_line_val, int max_line_val) {
-	centre_line_val = centre_line_val;
-	max_line_val = max_line_val;
+void RobotLineSensor::SetThresholdValues(int centre_line_val_inp, int max_line_val_inp) {
+	centre_line_val = centre_line_val_inp;
+	max_line_val = max_line_val_inp;
 };
 
 /**
@@ -43,6 +43,7 @@ bool RobotLineSensor::Detect() {
 float RobotLineSensor::LineFollowSense() {
 	float line_val = analogRead(line_pin_sense);
 	// Serial.println(String(line_val));
+	line_val_analog = line_val;
 	int turn = 0;
 	line_val -= centre_line_val;
 	if (line_val < 0) {//go right

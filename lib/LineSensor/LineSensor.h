@@ -9,6 +9,7 @@ public:
 	void SetThresholdValues(int centre_line_val, int max_line_val);
 	bool Detect();
 	float LineFollowSense();
+	float line_val_analog;
 private:
 	const byte line_pin_sense = 2;
 	const byte line_detect_pin = 7;
