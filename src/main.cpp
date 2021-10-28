@@ -52,15 +52,8 @@ void setup() {
 }
 
 void loop() {
-  if (PickUp.inital_angle_set) {
 
-  }
-  else {
-    PickUp.SetInitalAngle(180);
-  }
-
-  // float line_sense = LineSensor.LineFollowSense();
-  // bool line_detect = LineSensor.Detect();
+  //#region push-button
   reading = digitalRead(inPin);
   if (reading == HIGH && previous == LOW && millis() - time > debounce) {
     if (state == HIGH)
@@ -73,17 +66,22 @@ void loop() {
   previous = reading;
 
   digitalWrite(outPin, state);
+  if (!state) { return; }
+  //#endregion push-button
 
-  if (state == HIGH) {
-    Serial.println("high");
+
+
+  if (PickUp.inital_angle_set) {
+
   }
   else {
-    Serial.println("low");
+    PickUp.SetInitalAngle(180);
   }
+
 
   // Serial.println(String(line_detect) + " " + String(line_sense));
 
-  // Decisions.FollowLine(Bot, LineSensor, true);
+  Decisions.FollowLine(Bot, LineSensor, false);
   //Serial.println(String(analogRead(line_pin_sense)));
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
@@ -92,7 +90,9 @@ void loop() {
 
   // Serial.println("Ultrasound Dist: " + String(ultrasound_distance) + " IR_Sensor: " + String(ir_distance));
 
-  Decisions.BlockCollect(Bot, Sensors, PickUp, BotIMU, LineSensor);
+  // Decisions.BlockCollect(Bot, Sensors, PickUp, BotIMU, LineSensor);
+
+
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
