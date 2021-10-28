@@ -45,7 +45,6 @@ void setup() {
   pinMode(inPin, INPUT);
   pinMode(outPin, OUTPUT);
 
-
 #ifdef WIFI_DEBUG
   WiFiComm.Connect();
 #endif
@@ -53,6 +52,13 @@ void setup() {
 }
 
 void loop() {
+  if (PickUp.inital_angle_set) {
+
+  }
+  else {
+    PickUp.SetInitalAngle(180);
+  }
+
   // float line_sense = LineSensor.LineFollowSense();
   // bool line_detect = LineSensor.Detect();
   reading = digitalRead(inPin);
@@ -85,6 +91,8 @@ void loop() {
   //float ultrasound_distance = Sensors.Ultrasound.GetDistance();
 
   // Serial.println("Ultrasound Dist: " + String(ultrasound_distance) + " IR_Sensor: " + String(ir_distance));
+
+  Decisions.BlockCollect(Bot, Sensors, PickUp, BotIMU, LineSensor);
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {

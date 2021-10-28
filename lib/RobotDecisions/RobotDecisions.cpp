@@ -83,3 +83,21 @@ void RobotDecisions::FollowLineWithWiFi(Robot Bot, RobotLineSensor LineSensor, W
 		// Bot.Move(LEFT, 100, FORWARD);
 	}
 }
+
+/**
+* @brief if ir sensor detects <25cm then it'll stop and rotate until the front line sensor detects the line again
+* BlockCollect should only be used when it is on the collection side and the collection servo is up (to avoid ir sensor detecting ramnp)
+*
+*/
+void RobotDecisions::BlockCollect(Robot Bot, RobotSensors Sensors, RobotPickUp PickUp, RobotIMU BotIMU, RobotLineSensor LineSensor) {
+	if (PickUp.angle != 90 && BotIMU.arena_side == END) {
+		if (Sensors.A02.GetDistance() <= 25) {
+			Bot.StopAll();
+
+			delay(10);
+			// Bot.Rotate(CLOCKWISE, LineSensor);
+			delay(10);
+			PickUp.Sweep(90);
+		}
+	}
+}
