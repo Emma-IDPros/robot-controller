@@ -8,7 +8,14 @@
 #include "PickUp.h"
 #include "RobotDecisions.h"
 // #define WIFI_DEBUG
+int inPin = 2;         // the number of the input pin
+int outPin = 13;       // the number of the output pin
 
+int state = HIGH;
+int reading;
+int previous = LOW;
+long time = 0;
+long debounce = 200;
 
 #ifdef WIFI_DEBUG
 #include "WiFiComms.h"
@@ -35,6 +42,9 @@ void setup() {
 
   LineSensor.SetThresholdValues(253, 480);
 
+  pinMode(inPin, INPUT);
+  pinMode(outPin, OUTPUT);
+
 
 #ifdef WIFI_DEBUG
   WiFiComm.Connect();
@@ -45,10 +55,29 @@ void setup() {
 void loop() {
   // float line_sense = LineSensor.LineFollowSense();
   // bool line_detect = LineSensor.Detect();
+  reading = digitalRead(inPin);
+  if (reading == HIGH && previous == LOW && millis() - time > debounce) {
+    if (state == HIGH)
+      state = LOW;
+    else
+      state = HIGH;
+
+    time = millis();
+  }
+  previous = reading;
+
+  digitalWrite(outPin, state);
+
+  if (state == HIGH) {
+    Serial.println("high");
+  }
+  else {
+    Serial.println("low");
+  }
 
   // Serial.println(String(line_detect) + " " + String(line_sense));
 
-  Decisions.FollowLine(Bot, LineSensor, true);
+  // Decisions.FollowLine(Bot, LineSensor, true);
   //Serial.println(String(analogRead(line_pin_sense)));
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 

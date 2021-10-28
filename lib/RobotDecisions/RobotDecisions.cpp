@@ -9,8 +9,8 @@ void RobotDecisions::FollowLine(Robot Bot, RobotLineSensor LineSensor, bool use_
 	if (!LineSensor.Detect() && use_front_line) {
 		bool move_left = recovery_status == ROTATE_LEFT || recovery_status == RIGHT_TO_MIDDLE;
 
-		Bot.Move(LEFT, 50, move_left ? BACKWARD : FORWARD);
-		Bot.Move(RIGHT, 50, move_left ? FORWARD : BACKWARD);
+		Bot.Move(LEFT, 255, move_left ? BACKWARD : FORWARD);
+		Bot.Move(RIGHT, 255, move_left ? FORWARD : BACKWARD);
 
 		if (millis() - prevMillis > DELAY) {
 			switch (recovery_status)
