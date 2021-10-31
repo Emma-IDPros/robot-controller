@@ -51,7 +51,7 @@ void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
  */
 void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
 
-	if (ValidateMotorStatus(LEFT, speed, DIRECTION) && ValidateMotorStatus(RIGHT, speed, DIRECTION)) {
+	if (ValidateMotorStatus(LEFT, speed, DIRECTION)) {
 		MotorLeft->setSpeed(speed);
 		MotorLeft->run(DIRECTION);
 	}
