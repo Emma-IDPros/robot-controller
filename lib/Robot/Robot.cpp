@@ -150,6 +150,27 @@ Adafruit_DCMotor* Robot::MotorFromMotorNumber(MOTOR motor) {
 	}
 }
 
+/**
+ * @brief Validating the motor status.
+ * When trying to update the speed or direction of a motor
+ * it will first check to see if the motor's speed or direction
+ * has changed from its previous state. If so, it will return true
+ * and change the motot status. Otherwise it will return false.
+ *
+ * The purpose of this function is to reduce the number of times
+ * we are signalling the MotorShield to run the motor even if the speed
+ * has not changed.
+ *
+ *
+ * @param motor_side
+ * The motor that you want to move (LEFT or RIGHT)
+ * @param speed
+ * 8 bit int (0-255) to set the speed of rotation
+ * @param DIRECTION
+ * Direction of rotation.
+ * Either FORWARDS or BACKWARDS or RELEASE
+ * @return true or false
+ */
 bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
 	switch (motor)
 	{

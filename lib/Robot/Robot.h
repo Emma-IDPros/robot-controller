@@ -9,6 +9,7 @@
 enum ROTATION { CLOCKWISE, ANTICLOCKWISE };
 enum MOTOR { LEFT, RIGHT };
 
+// stores the motor speed and direction
 struct MotorStatus
 {
 	int speed, DIRECTION;
