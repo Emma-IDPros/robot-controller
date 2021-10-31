@@ -34,7 +34,7 @@ void Robot::MotorShieldTest() {
 void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
 
 	if (ValidateMotorStatus(motor_side, speed, DIRECTION)) {
-		Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
+		Adafruit_DCMotor* motor = MotorFromMotorNumber(motor_side);
 		motor->setSpeed(speed);
 		motor->run(DIRECTION);
 	}
@@ -70,7 +70,7 @@ void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
 void Robot::Stop(MOTOR motor_side) {
 
 	if (ValidateMotorStatus(motor_side, 0, RELEASE)) {
-		Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
+		Adafruit_DCMotor* motor = MotorFromMotorNumber(motor_side);
 		motor->run(RELEASE);
 	}
 };
@@ -135,7 +135,7 @@ void Robot::StopAll() {
   * @return Adafruit_DCMotor*
   * Returns a pointer to that specific motor
   */
-Adafruit_DCMotor* Robot::motor_from_motor_number(MOTOR motor) {
+Adafruit_DCMotor* Robot::MotorFromMotorNumber(MOTOR motor) {
 	switch (motor)
 	{
 	case LEFT:

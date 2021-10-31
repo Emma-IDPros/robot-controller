@@ -30,8 +30,8 @@ public:
 	// void Rotate(ROTATION rotation, RobotLineSensor LineSensor);
 	float rotation_time;
 	static bool rotate_execute;
-	Adafruit_DCMotor* motor_from_motor_number(MOTOR motor);
 private:
+	Adafruit_DCMotor* MotorFromMotorNumber(MOTOR motor);
 	MotorStatus motor_status_left, motor_status_right;
 	bool ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION);
 };
