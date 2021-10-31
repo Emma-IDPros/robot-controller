@@ -33,8 +33,11 @@ void Robot::MotorShieldTest() {
  */
 void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
 	Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
-	motor->setSpeed(speed);
-	motor->run(DIRECTION);
+
+	if (ValidateMotorStatus(motor_side, speed, DIRECTION)) {
+		motor->setSpeed(speed);
+		motor->run(DIRECTION);
+	}
 };
 
 /**
@@ -127,6 +130,54 @@ Adafruit_DCMotor* Robot::motor_from_motor_number(MOTOR motor) {
 		break;
 	case RIGHT:
 		return MotorRight;
+		break;
+
+	default:
+		break;
+	}
+}
+
+void Robot::UpdateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
+	switch (motor)
+	{
+	case LEFT:
+		motor_status_left.speed = speed;
+		motor_status_left.DIRECTION = DIRECTION;
+		break;
+	case RIGHT:
+		motor_status_right.speed = speed;
+		motor_status_right.DIRECTION = DIRECTION;
+		break;
+
+	default:
+		break;
+	}
+}
+
+bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
+	switch (motor)
+	{
+	case LEFT:
+		if (motor_status_left.speed != speed && motor_status_left.DIRECTION != DIRECTION) {
+
+			motor_status_left.speed = speed;
+			motor_status_left.DIRECTION = DIRECTION;
+			return true;
+		}
+		else {
+			return false;
+		}
+		break;
+	case RIGHT:
+		if (motor_status_right.speed != speed && motor_status_right.DIRECTION != DIRECTION) {
+
+			motor_status_right.speed = speed;
+			motor_status_right.DIRECTION = DIRECTION;
+			return true;
+		}
+		else {
+			return false;
+		}
 		break;
 
 	default:
