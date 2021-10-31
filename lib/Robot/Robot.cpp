@@ -52,10 +52,12 @@ void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
 void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
 
 	if (ValidateMotorStatus(LEFT, speed, DIRECTION) && ValidateMotorStatus(RIGHT, speed, DIRECTION)) {
-		MotorRight->setSpeed(speed);
-		MotorRight->run(DIRECTION);
 		MotorLeft->setSpeed(speed);
 		MotorLeft->run(DIRECTION);
+	}
+	if (ValidateMotorStatus(RIGHT, speed, DIRECTION)) {
+		MotorRight->setSpeed(speed);
+		MotorRight->run(DIRECTION);
 	}
 };
 
@@ -78,8 +80,10 @@ void Robot::Stop(MOTOR motor_side) {
  */
 void Robot::StopAll() {
 
-	if (ValidateMotorStatus(LEFT, 0, RELEASE) && ValidateMotorStatus(RIGHT, 0, RELEASE)) {
+	if (ValidateMotorStatus(LEFT, 0, RELEASE)) {
 		MotorLeft->run(RELEASE);
+	}
+	if (ValidateMotorStatus(RIGHT, 0, RELEASE)) {
 		MotorRight->run(RELEASE);
 	}
 };
