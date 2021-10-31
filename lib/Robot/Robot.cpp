@@ -32,9 +32,9 @@ void Robot::MotorShieldTest() {
  * Either FORWARDS or BACKWARDS
  */
 void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
-	Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
 
 	if (ValidateMotorStatus(motor_side, speed, DIRECTION)) {
+		Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
 		motor->setSpeed(speed);
 		motor->run(DIRECTION);
 	}
@@ -50,10 +50,13 @@ void Robot::Move(MOTOR motor_side, uint8_t speed, uint8_t DIRECTION) {
  * Either FORWARDS or BACKWARDS
  */
 void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
-	MotorRight->setSpeed(speed);
-	MotorRight->run(DIRECTION);
-	MotorLeft->setSpeed(speed);
-	MotorLeft->run(DIRECTION);
+
+	if (ValidateMotorStatus(LEFT, speed, DIRECTION) && ValidateMotorStatus(RIGHT, speed, DIRECTION)) {
+		MotorRight->setSpeed(speed);
+		MotorRight->run(DIRECTION);
+		MotorLeft->setSpeed(speed);
+		MotorLeft->run(DIRECTION);
+	}
 };
 
 /**
@@ -63,16 +66,22 @@ void Robot::MoveAll(uint8_t speed, uint8_t DIRECTION) {
  * The motor that you want to stop (1 or 2)
  */
 void Robot::Stop(MOTOR motor_side) {
-	Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
-	motor->run(RELEASE);
+
+	if (ValidateMotorStatus(motor_side, 0, RELEASE)) {
+		Adafruit_DCMotor* motor = motor_from_motor_number(motor_side);
+		motor->run(RELEASE);
+	}
 };
 
 /**
  * @brief Stops all motors from moving
  */
 void Robot::StopAll() {
-	MotorLeft->run(RELEASE);
-	MotorRight->run(RELEASE);
+
+	if (ValidateMotorStatus(LEFT, 0, RELEASE) && ValidateMotorStatus(RIGHT, 0, RELEASE)) {
+		MotorLeft->run(RELEASE);
+		MotorRight->run(RELEASE);
+	}
 };
 
 /**
@@ -130,23 +139,6 @@ Adafruit_DCMotor* Robot::motor_from_motor_number(MOTOR motor) {
 		break;
 	case RIGHT:
 		return MotorRight;
-		break;
-
-	default:
-		break;
-	}
-}
-
-void Robot::UpdateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
-	switch (motor)
-	{
-	case LEFT:
-		motor_status_left.speed = speed;
-		motor_status_left.DIRECTION = DIRECTION;
-		break;
-	case RIGHT:
-		motor_status_right.speed = speed;
-		motor_status_right.DIRECTION = DIRECTION;
 		break;
 
 	default:

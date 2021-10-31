@@ -9,6 +9,11 @@
 enum ROTATION { CLOCKWISE, ANTICLOCKWISE };
 enum MOTOR { LEFT, RIGHT };
 
+struct MotorStatus
+{
+	int speed, DIRECTION;
+};
+
 // Robot Class
 class Robot {
 public:
@@ -27,13 +32,7 @@ public:
 	static bool rotate_execute;
 	Adafruit_DCMotor* motor_from_motor_number(MOTOR motor);
 private:
-	MotorStatus MotorStatusFromMotor(MOTOR motor);
 	MotorStatus motor_status_left, motor_status_right;
-	void UpdateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION);
 	bool ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION);
 };
 
-struct MotorStatus
-{
-	int speed, DIRECTION;
-};
