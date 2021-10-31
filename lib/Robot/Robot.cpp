@@ -154,7 +154,7 @@ bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
 	switch (motor)
 	{
 	case LEFT:
-		if (motor_status_left.speed != speed && motor_status_left.DIRECTION != DIRECTION) {
+		if (motor_status_left.speed != speed || motor_status_left.DIRECTION != DIRECTION) {
 
 			motor_status_left.speed = speed;
 			motor_status_left.DIRECTION = DIRECTION;
@@ -165,7 +165,7 @@ bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
 		}
 		break;
 	case RIGHT:
-		if (motor_status_right.speed != speed && motor_status_right.DIRECTION != DIRECTION) {
+		if (motor_status_right.speed != speed || motor_status_right.DIRECTION != DIRECTION) {
 
 			motor_status_right.speed = speed;
 			motor_status_right.DIRECTION = DIRECTION;
