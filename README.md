@@ -13,10 +13,10 @@ A software engineer should **always** chose the best tools, and PlatformIO is si
 ```
 - include/configs.h
 - lib/
-	 |	LineSensor/ ..
-	 |	Robot/..
-	 .
-	 .
+	|	LineSensor/ ..
+	|	Robot/..
+	.
+	.
 - src/main.cpp
 ```
 
