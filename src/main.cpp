@@ -49,28 +49,19 @@ void setup() {
 
 void loop() {
 
-  // exit loop if toggle switch is toggled off
+  // Exit loop if toggle switch is toggled off
   if (!ToggleSwitch.GetAndUpdateState()) { Bot.StopAll(); return; }
-  StatusLED.Blink(2, Bot.IsMoving());
 
-
+  // setting inital conditions
   PickUp.SetInitalAngle(180); // this only runs once
 
+  // Updates --------------------------
+  BotIMU.Update();
+  StatusLED.Blink(2, Bot.IsMoving());
+  // ----------------------------------
 
-
-// Serial.println(String(line_detect) + " " + String(line_sense));
 
   Decisions.FollowLine(Bot, LineSensor, false);
-  //Serial.println(String(analogRead(line_pin_sense)));
-  // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
-
-  //float ir_distance = Sensors.A02.GetDistance();
-  //float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-
-  // Serial.println("Ultrasound Dist: " + String(ultrasound_distance) + " IR_Sensor: " + String(ir_distance));
-
-  // Decisions.BlockCollect(Bot, Sensors, PickUp, BotIMU, LineSensor);
-
 
 
 #ifdef WIFI_DEBUG
@@ -80,4 +71,4 @@ void loop() {
 
   }
 #endif
-}
+  }
