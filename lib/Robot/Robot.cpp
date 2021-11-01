@@ -201,3 +201,7 @@ bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
 		break;
 	}
 }
+
+bool Robot::IsMoving() {
+	return motor_status_left.DIRECTION != RELEASE && motor_status_right.DIRECTION != RELEASE;
+}

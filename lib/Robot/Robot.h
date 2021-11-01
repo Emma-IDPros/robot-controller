@@ -25,13 +25,14 @@ public:
 	void Stop(MOTOR motor);
 	void StopAll();
 	void Rotate(ROTATION rotation, RobotLineSensor LineSensor);
-	MotorStatus motor_status_left, motor_status_right;
+	bool IsMoving();
 private:
 	Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 	Adafruit_DCMotor* MotorRight = AFMS.getMotor(3);
 	Adafruit_DCMotor* MotorLeft = AFMS.getMotor(4);
 	Adafruit_DCMotor* MotorFromMotorNumber(MOTOR motor);
 	bool ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION);
+	MotorStatus motor_status_left, motor_status_right;
 	float rotation_time;
 	static bool rotate_execute;
 };
