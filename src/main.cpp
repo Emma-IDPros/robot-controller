@@ -7,15 +7,9 @@
 #include "LineSensor.h"
 #include "PickUp.h"
 #include "RobotDecisions.h"
+#include "ToggleSwitch.h"
 // #define WIFI_DEBUG
-int inPin = 2;         // the number of the input pin
-int outPin = 13;       // the number of the output pin
 
-int state = HIGH;
-int reading;
-int previous = LOW;
-long time = 0;
-long debounce = 200;
 
 #ifdef WIFI_DEBUG
 #include "WiFiComms.h"
@@ -29,6 +23,7 @@ RobotMetalDetector MetalDetector;
 RobotLineSensor LineSensor;
 RobotPickUp PickUp;
 RobotDecisions Decisions;
+RobotToggleSwitch ToggleSwitch;
 
 void setup() {
 
@@ -39,11 +34,9 @@ void setup() {
   LineSensor.SetPins(line_pin_sense, line_detect_pin);
   PickUp.SetPins(PU_servo_pin);
   BotIMU.Begin();
+  ToggleSwitch.SetPins(2, 13);
 
   LineSensor.SetThresholdValues(253, 480);
-
-  pinMode(inPin, INPUT);
-  pinMode(outPin, OUTPUT);
 
 #ifdef WIFI_DEBUG
   WiFiComm.Connect();
@@ -54,22 +47,9 @@ void setup() {
 void loop() {
 
   //#region push-button
-  reading = digitalRead(inPin);
-  if (reading == HIGH && previous == LOW && millis() - time > debounce) {
-    if (state == HIGH)
-      state = LOW;
-    else
-      state = HIGH;
-
-    time = millis();
-  }
-  previous = reading;
-
-  digitalWrite(outPin, state);
-  if (!state) { return; }
+  ToggleSwitch.UpdateState();
+  if (!ToggleSwitch.state) { return; }
   //#endregion push-button
-
-
 
 
   PickUp.SetInitalAngle(180); // this only runs once
