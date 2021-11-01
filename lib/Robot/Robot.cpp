@@ -202,6 +202,12 @@ bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
 	}
 }
 
+/**
+ * @brief Uses the motor status to determine if the robot is moving
+ *
+ * @return true if it is moving
+ * @return false if it is stationary
+ */
 bool Robot::IsMoving() {
 	return motor_status_left.DIRECTION != RELEASE && motor_status_right.DIRECTION != RELEASE;
 }
