@@ -95,37 +95,37 @@ void Robot::StopAll() {
  * Direction of robot rotation (either true for clockwise or false for anticlockwise)
  */
 
- // void Robot::Rotate(ROTATION rotation, RobotLineSensor LineSensor) {
- // 	rotation_time = 0;
- // 	if (rotation == CLOCKWISE) {
- // 		while (rotation_time < 50) {
- // 			Move(RIGHT, 255, BACKWARD);
- // 			Move(LEFT, 255, FORWARD);
- // 			delay(10);
- // 			rotation_time++;
- // 		}
- // 		while (LineSensor.Detect() == 0) {
- // 			Move(RIGHT, 255, BACKWARD);
- // 			Move(LEFT, 255, FORWARD);
- // 			delay(10);
- // 		}
- // 		StopAll();
- // 	}
- // 	else {
- // 		while (rotation_time < 50) {
- // 			Move(RIGHT, 255, FORWARD);
- // 			Move(LEFT, 255, BACKWARD);
- // 			delay(10);
- // 			rotation_time++;
- // 		}
- // 		while (LineSensor.Detect() == 0) {
- // 			Move(RIGHT, 255, FORWARD);
- // 			Move(LEFT, 255, BACKWARD);
- // 			delay(10);
- // 		}
- // 		StopAll();
- // 	}
- // }
+ void Robot::Rotate(ROTATION rotation, RobotLineSensor LineSensor) {
+ 	rotation_time = 0;
+ 	if (rotation == CLOCKWISE) {
+ 		while (rotation_time < 50) {
+ 			Move(RIGHT, 255, BACKWARD);
+ 			Move(LEFT, 255, FORWARD);
+ 			delay(10);
+ 			rotation_time++;
+ 		}
+ 		while (LineSensor.Detect() == 0) {
+ 			Move(RIGHT, 255, BACKWARD);
+ 			Move(LEFT, 255, FORWARD);
+ 			delay(10);
+ 		}
+ 		StopAll();
+ 	}
+ 	else {
+ 		while (rotation_time < 50) {
+ 			Move(RIGHT, 255, FORWARD);
+ 			Move(LEFT, 255, BACKWARD);
+ 			delay(10);
+ 			rotation_time++;
+ 		}
+ 		while (LineSensor.Detect() == 0) {
+ 			Move(RIGHT, 255, FORWARD);
+ 			Move(LEFT, 255, BACKWARD);
+ 			delay(10);
+ 		}
+ 		StopAll();
+ 	}
+ }
 
  /**
   * @brief Returns an Adafruit_DCMotor pointer given a motor number

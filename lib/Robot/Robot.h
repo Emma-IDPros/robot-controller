@@ -24,7 +24,7 @@ public:
 	void MoveAll(uint8_t speed, uint8_t DIRECTION);
 	void Stop(MOTOR motor);
 	void StopAll();
-	// void Rotate(ROTATION rotation, RobotLineSensor LineSensor);
+	void Rotate(ROTATION rotation, RobotLineSensor LineSensor);
 private:
 	Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 	Adafruit_DCMotor* MotorRight = AFMS.getMotor(3);

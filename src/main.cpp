@@ -36,7 +36,7 @@ void setup() {
   Bot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
   // MetalDetector.SetPins(MD_pin_pulse, MD_pin_cap, MD_pin_LED1, MD_pin_LED2);
-  LineSensor.SetPins(line_pin_sense, line_detect_pin);
+  LineSensor.SetPins(line_pin_sense, line_detect_pin, line_junc_detect_pin);
   PickUp.SetPins(PU_servo_pin);
   BotIMU.Begin();
 

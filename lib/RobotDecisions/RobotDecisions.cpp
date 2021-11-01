@@ -35,22 +35,21 @@ void RobotDecisions::FollowLine(Robot Bot, RobotLineSensor LineSensor, bool use_
 		Serial.println(recovery_status);
 		return;
 	}
+
+	// proportional control
 	if (LineSensor.LineFollowSense() < -DEADZONE) {
 		rot_speed = LineSensor.LineFollowSense() * SWING + (MAXSPEED - SWING);
 		Bot.Move(LEFT, int(rot_speed), FORWARD);
 		Bot.Move(RIGHT, (1 - DEADZONE) * MAXSPEED, FORWARD);
-		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT 200 RIGHT:" + String(rot_speed) + " " + String(LineSensor.line_val_analog));
-		// Bot.Move(RIGHT, 100, FORWARD);
+		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT: " + String((1 - DEADZONE) * MAXSPEED) + " LEFT: " + String(rot_speed) + " Analogue input: " + String(LineSensor.line_val_analog));
+
 	}
 	else if (LineSensor.LineFollowSense() > DEADZONE) {
 		rot_speed = (-LineSensor.LineFollowSense() * SWING) + (MAXSPEED - SWING);
 		Bot.Move(RIGHT, int(rot_speed), FORWARD);
 		Bot.Move(LEFT, (1 - DEADZONE) * MAXSPEED, FORWARD);
-		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT 200 LEFT:" + String(rot_speed) + " " + String(LineSensor.line_val_analog));
+		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT: " + String((1 - DEADZONE) * MAXSPEED) + " RIGHT: " + String(rot_speed) + " Analogue input: " + String(LineSensor.line_val_analog));
 
-
-		// Serial.println("LEFT " + String(rot_speed));
-		// Bot.Move(LEFT, 100, FORWARD);
 	}
 	else {
 		Bot.Move(RIGHT, (1 - DEADZONE) * MAXSPEED, FORWARD);
@@ -58,29 +57,60 @@ void RobotDecisions::FollowLine(Robot Bot, RobotLineSensor LineSensor, bool use_
 	}
 }
 
-void RobotDecisions::FollowLineWithWiFi(Robot Bot, RobotLineSensor LineSensor, WiFiComms WiFiComm) {
-	if (LineSensor.Detect()) {
-		Bot.MoveAll(255, FORWARD);
-		Serial.println("STRAIGHT");
-		WiFiComm.Message("STRAIGHT");
-	}
-	else if (LineSensor.LineFollowSense() < -0.5 && !LineSensor.Detect()) {
-		rot_speed = LineSensor.LineFollowSense() * 130 + 200;
-		Bot.Move(LEFT, 200, FORWARD);
-		Bot.Move(RIGHT, rot_speed, FORWARD);
-		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT 200 RIGHT:" + String(rot_speed));
-		WiFiComm.Message(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT 200 RIGHT:" + String(rot_speed));
-		// Bot.Move(RIGHT, 100, FORWARD);
-	}
-	else if (LineSensor.LineFollowSense() > 0.5 && !LineSensor.Detect()) {
-		rot_speed = -LineSensor.LineFollowSense() * 130 + 200;
-		Bot.Move(RIGHT, 200, FORWARD);
-		Bot.Move(LEFT, rot_speed, FORWARD);
-		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT 200 LEFT:" + String(rot_speed));
-		WiFiComm.Message(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT 200 LEFT:" + String(rot_speed));
+// FollowLineWithWifi has the same code as above, but outputs to the laptop over wifi
+void RobotDecisions::FollowLineWithWiFi(Robot Bot, RobotLineSensor LineSensor, bool use_front_line = false, WiFiComms WiFiComm) {
+	int MAXSPEED = 250;
+	int SWING = 50;
+	int DEADZONE = 0.01;
+	int DELAY = 1000;
+	if (!LineSensor.Detect() && use_front_line) {
+		bool move_left = recovery_status == ROTATE_LEFT || recovery_status == RIGHT_TO_MIDDLE;
 
-		// Serial.println("LEFT " + String(rot_speed));
-		// Bot.Move(LEFT, 100, FORWARD);
+		Bot.Move(LEFT, 255, move_left ? BACKWARD : FORWARD);
+		Bot.Move(RIGHT, 255, move_left ? FORWARD : BACKWARD);
+
+		if (millis() - prevMillis > DELAY) {
+			switch (recovery_status)
+			{
+			case ROTATE_LEFT:
+				recovery_status = LEFT_TO_MIDDLE;
+				break;
+			case LEFT_TO_MIDDLE:
+				recovery_status = ROTATE_RIGHT;
+				break;
+			case ROTATE_RIGHT:
+				recovery_status = RIGHT_TO_MIDDLE;
+				break;
+			case RIGHT_TO_MIDDLE:
+				recovery_status = ROTATE_LEFT;
+				break;
+			default:
+				break;
+			}
+			prevMillis = millis();
+		}
+		Serial.println(recovery_status);
+		return;
+	}
+	if (LineSensor.LineFollowSense() < -DEADZONE) {
+		rot_speed = LineSensor.LineFollowSense() * SWING + (MAXSPEED - SWING);
+		Bot.Move(LEFT, int(rot_speed), FORWARD);
+		Bot.Move(RIGHT, (1 - DEADZONE) * MAXSPEED, FORWARD);
+		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT: " + String((1 - DEADZONE) * MAXSPEED) + " LEFT: " + String(rot_speed) + " Analogue input: " + String(LineSensor.line_val_analog));
+		WiFiComm.Message(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " RIGHT: " + String((1 - DEADZONE) * MAXSPEED) + " LEFT: " + String(rot_speed) + " Analogue input: " + String(LineSensor.line_val_analog));
+
+	}
+	else if (LineSensor.LineFollowSense() > DEADZONE) {
+		rot_speed = (-LineSensor.LineFollowSense() * SWING) + (MAXSPEED - SWING);
+		Bot.Move(RIGHT, int(rot_speed), FORWARD);
+		Bot.Move(LEFT, (1 - DEADZONE) * MAXSPEED, FORWARD);
+		Serial.println(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT " + String((1 - DEADZONE) * MAXSPEED) + " RIGHT: " + String(rot_speed) + " Analogue input: " + String(LineSensor.line_val_analog));
+		WiFiComm.Message(String(LineSensor.LineFollowSense()) + " " + String(LineSensor.Detect()) + " LEFT " + String((1 - DEADZONE) * MAXSPEED) + " RIGHT: " + String(rot_speed) + " Analogue input :" + String(LineSensor.line_val_analog));
+
+	}
+	else {
+		Bot.Move(RIGHT, (1 - DEADZONE) * MAXSPEED, FORWARD);
+		Bot.Move(LEFT, (1 - DEADZONE) * MAXSPEED, FORWARD);
 	}
 }
 
@@ -100,4 +130,41 @@ void RobotDecisions::BlockCollect(Robot Bot, RobotSensors Sensors, RobotPickUp P
 			PickUp.Sweep(90);
 		}
 	}
+}
+
+void RobotDecisions::Junction(Robot Bot, RobotSensors Sensors, RobotPickUp PickUp, RobotIMU BotIMU, RobotLineSensor LineSensor, RobotMetalDetector MetalDetector) {
+	static bool leaving_start = true;
+
+	// only run junction detection when it is not leaving the starting box 
+	// will begin once it has crossed to the other side
+	if (BotIMU.arena_side == END) {
+		leaving_start = false;
+
+	}
+
+	// returning to starting side from having collected a block
+	if (leaving_start == false && BotIMU.arena_side == BEGINNING){
+		if (LineSensor.JunctionDetect() == true){
+			Bot.StopAll();
+
+			delay(10);
+			if (MetalDetector.detected == true) {
+				Bot.Rotate(ANTICLOCKWISE, LineSensor); // rotates the other direction to the deposit box, to reverse and deposit block
+				Bot.MoveAll(100, BACKWARD);
+				delay(100);
+				Bot.StopAll();
+
+				PickUp.Sweep(180);
+				//while (LineSensor.JunctionDetect == false){
+					//FollowLine(Bot, LineSensor, false);
+				//}
+				
+
+			}
+
+
+
+		}
+	}
+
 }
