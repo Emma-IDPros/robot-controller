@@ -51,7 +51,7 @@ void loop() {
 
   // exit loop if toggle switch is toggled off
   if (!ToggleSwitch.UpdateState()) { Bot.StopAll(); return; }
-  StatusLED.Blink(2, Bot.motor_status_left.speed != 0 && Bot.motor_status_right.speed != 0);
+  StatusLED.Blink(2, Bot.IsMoving());
 
 
   PickUp.SetInitalAngle(180); // this only runs once
