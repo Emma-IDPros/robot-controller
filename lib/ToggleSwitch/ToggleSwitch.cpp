@@ -9,7 +9,7 @@ void RobotToggleSwitch::SetPins(byte detect_pin_inp, byte led_pin_inp) {
 
 }
 
-void RobotToggleSwitch::UpdateState() {
+bool RobotToggleSwitch::UpdateState() {
 	int reading = digitalRead(detect_pin);
 	if (reading == HIGH && prev_state == LOW && millis() - prevMillis > debounce) {
 		if (state == HIGH)
@@ -22,4 +22,5 @@ void RobotToggleSwitch::UpdateState() {
 	prev_state = reading;
 
 	digitalWrite(led_pin, state);
+	return state;
 }

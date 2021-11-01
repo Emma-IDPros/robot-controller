@@ -49,10 +49,8 @@ void setup() {
 
 void loop() {
 
-  //#region push-button
-  ToggleSwitch.UpdateState();
-  if (!ToggleSwitch.state) { return; }
-  //#endregion push-button
+  // exit loop if toggle switch is toggled off
+  if (!ToggleSwitch.UpdateState()) { Bot.StopAll(); return; }
 
 
   PickUp.SetInitalAngle(180); // this only runs once
