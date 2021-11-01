@@ -8,6 +8,7 @@
 #include "PickUp.h"
 #include "RobotDecisions.h"
 #include "ToggleSwitch.h"
+#include "StatusLED.h"
 // #define WIFI_DEBUG
 
 
@@ -24,6 +25,7 @@ RobotLineSensor LineSensor;
 RobotPickUp PickUp;
 RobotDecisions Decisions;
 RobotToggleSwitch ToggleSwitch;
+RobotStatusLED StatusLED;
 
 void setup() {
 
@@ -34,7 +36,8 @@ void setup() {
   LineSensor.SetPins(line_pin_sense, line_detect_pin);
   PickUp.SetPins(PU_servo_pin);
   BotIMU.Begin();
-  ToggleSwitch.SetPins(2, 13);
+  ToggleSwitch.SetPins(T_detect_pin, T_led_pin);
+  StatusLED.SetPins(amber_led_pin);
 
   LineSensor.SetThresholdValues(253, 480);
 
