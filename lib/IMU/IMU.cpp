@@ -24,6 +24,11 @@ RAMP_DIRECTION RobotIMU::DetectRamp() {
 
 }
 
+/**
+ * @brief Updates what side of the arena the robot is on
+ * by detecting when it is going down a ramp
+ *
+ */
 void RobotIMU::UpdateArenaSide() {
 	RAMP_DIRECTION ramp_dir = DetectRamp();
 
@@ -36,7 +41,10 @@ void RobotIMU::UpdateArenaSide() {
 	prev_ramp_dir = ramp_dir;
 }
 
-
+/**
+ * @brief Reads the roll, yaw and pitch angles into its attributes
+ *
+ */
 void RobotIMU::ReadAngles() {
 	if (millis() - prevMilliSeconds >= 1000 / SAMPLE_RATE) {
 
