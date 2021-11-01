@@ -75,3 +75,12 @@ void RobotIMU::Begin() {
 	}
 	filter.begin(SAMPLE_RATE);
 }
+
+/**
+ * @brief Runs ReadAngle and UpdateArenaSide
+ *
+ */
+void RobotIMU::Update() {
+	ReadAngles();
+	UpdateArenaSide();
+}
