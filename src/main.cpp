@@ -50,7 +50,7 @@ void setup() {
 void loop() {
 
   // exit loop if toggle switch is toggled off
-  if (!ToggleSwitch.UpdateState()) { Bot.StopAll(); return; }
+  if (!ToggleSwitch.GetAndUpdateState()) { Bot.StopAll(); return; }
   StatusLED.Blink(2, Bot.IsMoving());
 
 

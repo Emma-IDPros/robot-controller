@@ -4,7 +4,7 @@
 class RobotToggleSwitch {
 public:
 	void SetPins(byte detect_pin_inp, byte led_pin_inp);
-	bool UpdateState();
+	bool GetAndUpdateState();
 	int state;
 private:
 	byte detect_pin, led_pin;
