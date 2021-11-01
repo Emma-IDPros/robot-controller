@@ -71,15 +71,12 @@ void loop() {
 
 
 
-  if (PickUp.inital_angle_set) {
 
-  }
-  else {
-    PickUp.SetInitalAngle(180);
-  }
+  PickUp.SetInitalAngle(180); // this only runs once
 
 
-  // Serial.println(String(line_detect) + " " + String(line_sense));
+
+// Serial.println(String(line_detect) + " " + String(line_sense));
 
   Decisions.FollowLine(Bot, LineSensor, false);
   //Serial.println(String(analogRead(line_pin_sense)));
