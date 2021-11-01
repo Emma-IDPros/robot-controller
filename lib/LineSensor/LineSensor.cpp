@@ -67,6 +67,11 @@ float RobotLineSensor::LineFollowSense() {
 	return line_val;
 }
 
+/**
+ * @brief Detects junctions
+ *
+ * @return true if detected, and false if not
+ */
 bool RobotLineSensor::JunctionDetect() {
 	return digitalRead(line_junc_detect_pin);
 }
