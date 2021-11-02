@@ -61,8 +61,8 @@ void loop() {
   // ----------------------------------
 
 
-  Decisions.FollowLine(Bot, LineSensor, false);
-
+  //Decisions.FollowLine(Bot, LineSensor, false);
+  Decisions.FollowLine_v0(Bot, LineSensor);
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
