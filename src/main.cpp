@@ -59,24 +59,24 @@ void loop() {
   // Updates --------------------------
   BotIMU.Update();
   // Serial.println(String(Bot.IsMoving()));
-  StatusLED.Blink(4, Bot.IsMoving());
+  StatusLED.Blink(2, Bot.IsMoving());
   // ----------------------------------
 
 
   //Decisions.FollowLine(Bot, LineSensor, false);
 
 
-  if (BotIMU.arena_side == 1){
-      if (Sensors.A02.GetDistance() <= 21) {
+  if (BotIMU.arena_side == 1) {
+    if (Sensors.A02.GetDistance() <= 21) {
 
-        Bot.StopAll();
-        delay(10);
-        //Bot.Rotate(180, ANTICLOCKWISE);
-      }
-      else {
-        Bot.Move(LEFT, 235, BACKWARD);
-        Bot.Move(RIGHT, 255, BACKWARD);
-      }
+      Bot.StopAll();
+      delay(10);
+      //Bot.Rotate(180, ANTICLOCKWISE);
+    }
+    else {
+      Bot.Move(LEFT, 235, BACKWARD);
+      Bot.Move(RIGHT, 255, BACKWARD);
+    }
   }
   else {
 

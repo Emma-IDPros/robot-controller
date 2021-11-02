@@ -17,7 +17,7 @@ void RobotStatusLED::SetPins(byte S_LED_pin_inp) {
  * @param on true of you want it on and false if you want it off
  */
 void RobotStatusLED::Blink(int frequency, bool on) {
-	if (millis() - prevMillis > 1 / (float)frequency * 1000 && on) {
+	if (millis() - prevMillis > 1 / (float)frequency * 2 * 1000 && on) {
 		S_LED_state = S_LED_state == LOW ? HIGH : LOW;
 		digitalWrite(S_LED_pin, S_LED_state);
 		prevMillis = millis();
