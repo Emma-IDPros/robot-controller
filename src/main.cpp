@@ -66,9 +66,10 @@ void loop() {
   previous = reading;
 
   digitalWrite(outPin, state);
-  if (!state) { return; }
+  // if (!state) {
+  //   Bot.StopAll();
+  //    return; }
   //#endregion push-button
-
 
 
   if (PickUp.inital_angle_set) {
@@ -82,6 +83,8 @@ void loop() {
   // Serial.println(String(line_detect) + " " + String(line_sense));
 
   Decisions.FollowLine(Bot, LineSensor, false);
+  //   Bot.Move(LEFT, 200, FORWARD);
+  //   Bot.Move(RIGHT, 200, FORWARD);
   //Serial.println(String(analogRead(line_pin_sense)));
   // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
 
