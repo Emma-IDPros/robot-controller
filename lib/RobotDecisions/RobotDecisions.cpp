@@ -172,7 +172,7 @@ void RobotDecisions::Junction(Robot Bot, RobotSensors Sensors, RobotPickUp PickU
 
 			delay(10);
 			if (MetalDetector.detected == true) {
-				Bot.Rotate(ANTICLOCKWISE, LineSensor); // rotates the other direction to the deposit box, to reverse and deposit block
+				//Bot.Rotate(ANTICLOCKWISE, LineSensor); // rotates the other direction to the deposit box, to reverse and deposit block
 				Bot.MoveAll(100, BACKWARD);
 				delay(100);
 				Bot.StopAll();

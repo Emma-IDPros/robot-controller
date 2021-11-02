@@ -64,12 +64,14 @@ void loop() {
 
 
   //Decisions.FollowLine(Bot, LineSensor, false);
-  // Decisions.FollowLine_v0(Bot, LineSensor);
+
 
   if (BotIMU.arena_side == 1){
       if (Sensors.A02.GetDistance() <= 21) {
 
         Bot.StopAll();
+        delay(10);
+        //Bot.Rotate(180, ANTICLOCKWISE);
       }
       else {
         Bot.Move(LEFT, 235, BACKWARD);
@@ -81,9 +83,8 @@ void loop() {
     Bot.Move(LEFT, 235, BACKWARD);
     Bot.Move(RIGHT, 255, BACKWARD);
   }
-  Serial.println(String(Sensors.A02.GetDistance()));
+  Serial.println(String(Sensors.A02.GetDistance()) + " " + String(BotIMU.arena_side));
 
-  Serial.println(String(Sensors.Ultrasound.GetDistance()));
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {

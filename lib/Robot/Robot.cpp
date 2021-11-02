@@ -211,3 +211,48 @@ bool Robot::ValidateMotorStatus(MOTOR motor, uint8_t speed, uint8_t DIRECTION) {
 bool Robot::IsMoving() {
 	return motor_status_left.DIRECTION != RELEASE && motor_status_right.DIRECTION != RELEASE;
 }
+
+void Robot::Rotate(uint8_t angle, ROTATION rotation) {
+	rotation_time = 0;
+
+	if (angle == 90) {
+		if (rotation == CLOCKWISE) {
+			while (rotation_time < 160) {
+				Move(RIGHT, 255, BACKWARD);
+				Move(LEFT, 255, FORWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
+		}
+		else {
+			while (rotation_time < 160) {
+				Move(RIGHT, 255, FORWARD);
+				Move(LEFT, 255, BACKWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
+		}
+	}
+	else if (angle == 180) {
+		if (rotation == CLOCKWISE) {
+			while (rotation_time < 320) {
+				Move(RIGHT, 255, BACKWARD);
+				Move(LEFT, 255, FORWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
+		}
+		else {
+			while (rotation_time < 320) {
+				Move(RIGHT, 255, FORWARD);
+				Move(LEFT, 255, BACKWARD);
+				delay(10);
+				rotation_time++;
+			}
+			StopAll();
+		}
+	}
+}
