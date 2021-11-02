@@ -1,10 +1,10 @@
 #pragma once
+#include <LineSensor.h>
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
-#include <LineSensor.h>
 
 enum ROTATION { CLOCKWISE, ANTICLOCKWISE };
 enum MOTOR { LEFT, RIGHT };
@@ -18,7 +18,6 @@ struct MotorStatus
 // Robot Class
 class Robot {
 public:
-
 	void MotorShieldTest();
 	void Move(MOTOR motor, uint8_t speed, uint8_t DIRECTION);
 	void MoveAll(uint8_t speed, uint8_t DIRECTION);

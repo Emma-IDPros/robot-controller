@@ -47,10 +47,11 @@ void setup() {
 
 }
 
+int i = 0;
 void loop() {
 
   // Exit loop if toggle switch is toggled off
-  if (!ToggleSwitch.GetAndUpdateState()) { Bot.StopAll(); return; }
+  // if (!ToggleSwitch.GetAndUpdateState()) { Bot.StopAll(); return; }
 
   // setting inital conditions
   PickUp.SetInitalAngle(180); // this only runs once
@@ -62,7 +63,15 @@ void loop() {
 
 
   //Decisions.FollowLine(Bot, LineSensor, false);
-  Decisions.FollowLine_v0(Bot, LineSensor);
+  // Decisions.FollowLine_v0(Bot, LineSensor);
+
+  while (i < 255) {
+    Bot.MoveAll(i, i > 100 ? FORWARD : BACKWARD);
+    i += 10;
+    delay(1000);
+    Serial.println(String(i));
+  }
+  Bot.StopAll();
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
@@ -71,4 +80,4 @@ void loop() {
 
   }
 #endif
-  }
+}
