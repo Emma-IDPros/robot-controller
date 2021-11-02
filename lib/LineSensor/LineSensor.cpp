@@ -6,10 +6,12 @@
  * @param line_pin_sense ANALOGUE
  * @param line_detect_pin DIGITAL
  */
-void RobotLineSensor::SetPins(byte line_pin_sense, byte line_detect_pin) {
+void RobotLineSensor::SetPins(byte line_pin_sense, byte line_detect_pin, byte line_junc_detect_pin) {
 	line_pin_sense = line_pin_sense;
 	line_detect_pin = line_detect_pin;
+	line_junc_detect_pin = line_junc_detect_pin;
 	pinMode(line_detect_pin, INPUT);
+	pinMode(line_junc_detect_pin, INPUT);
 }
 
 /**
@@ -64,4 +66,15 @@ float RobotLineSensor::LineFollowSense() {
 	}
 	return line_val;
 }
+
+/**
+ * @brief Detects junctions
+ *
+ * @return true if detected, and false if not
+ */
+bool RobotLineSensor::JunctionDetect() {
+	return digitalRead(line_junc_detect_pin);
+}
+
+
 

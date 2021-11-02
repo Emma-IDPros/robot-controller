@@ -7,15 +7,10 @@
 #include "LineSensor.h"
 #include "PickUp.h"
 #include "RobotDecisions.h"
+#include "ToggleSwitch.h"
+#include "StatusLED.h"
 // #define WIFI_DEBUG
-int inPin = 2;         // the number of the input pin
-int outPin = 13;       // the number of the output pin
 
-int state = HIGH;
-int reading;
-int previous = LOW;
-long time = 0;
-long debounce = 200;
 
 #ifdef WIFI_DEBUG
 #include "WiFiComms.h"
@@ -29,6 +24,8 @@ RobotMetalDetector MetalDetector;
 RobotLineSensor LineSensor;
 RobotPickUp PickUp;
 RobotDecisions Decisions;
+RobotToggleSwitch ToggleSwitch;
+RobotStatusLED StatusLED;
 
 void setup() {
 
@@ -36,14 +33,13 @@ void setup() {
   Bot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
   // MetalDetector.SetPins(MD_pin_pulse, MD_pin_cap, MD_pin_LED1, MD_pin_LED2);
-  LineSensor.SetPins(line_pin_sense, line_detect_pin);
+  LineSensor.SetPins(line_pin_sense, line_detect_pin, line_junc_detect_pin);
   PickUp.SetPins(PU_servo_pin);
   BotIMU.Begin();
+  ToggleSwitch.SetPins(T_detect_pin, T_led_pin);
+  StatusLED.SetPins(amber_led_pin);
 
   LineSensor.SetThresholdValues(253, 480);
-
-  pinMode(inPin, INPUT);
-  pinMode(outPin, OUTPUT);
 
 #ifdef WIFI_DEBUG
   WiFiComm.Connect();
@@ -51,51 +47,43 @@ void setup() {
 
 }
 
+int i = 0;
 void loop() {
 
-  //#region push-button
-  reading = digitalRead(inPin);
-  if (reading == HIGH && previous == LOW && millis() - time > debounce) {
-    if (state == HIGH)
-      state = LOW;
-    else
-      state = HIGH;
+  // Exit loop if toggle switch is toggled off
+  // if (!ToggleSwitch.GetAndUpdateState()) { Bot.StopAll(); return; }
 
-    time = millis();
-  }
-  previous = reading;
+  // setting inital conditions
+  PickUp.SetInitalAngle(180); // this only runs once
 
-  digitalWrite(outPin, state);
-  // if (!state) {
-  //   Bot.StopAll();
-  //    return; }
-  //#endregion push-button
+  // Updates --------------------------
+  BotIMU.Update();
+  // Serial.println(String(Bot.IsMoving()));
+  StatusLED.Blink(4, Bot.IsMoving());
+  // ----------------------------------
 
 
-  if (PickUp.inital_angle_set) {
+  //Decisions.FollowLine(Bot, LineSensor, false);
+  // Decisions.FollowLine_v0(Bot, LineSensor);
 
+  if (BotIMU.arena_side == 1){
+      if (Sensors.A02.GetDistance() <= 21) {
+
+        Bot.StopAll();
+      }
+      else {
+        Bot.Move(LEFT, 235, BACKWARD);
+        Bot.Move(RIGHT, 255, BACKWARD);
+      }
   }
   else {
-    PickUp.SetInitalAngle(180);
+
+    Bot.Move(LEFT, 235, BACKWARD);
+    Bot.Move(RIGHT, 255, BACKWARD);
   }
+  Serial.println(String(Sensors.A02.GetDistance()));
 
-
-  // Serial.println(String(line_detect) + " " + String(line_sense));
-
-  Decisions.FollowLine(Bot, LineSensor, false);
-  //   Bot.Move(LEFT, 200, FORWARD);
-  //   Bot.Move(RIGHT, 200, FORWARD);
-  //Serial.println(String(analogRead(line_pin_sense)));
-  // Decisions.FollowLineWithWiFi(Bot, LineSensor, WiFiComm);
-
-  //float ir_distance = Sensors.A02.GetDistance();
-  //float ultrasound_distance = Sensors.Ultrasound.GetDistance();
-
-  // Serial.println("Ultrasound Dist: " + String(ultrasound_distance) + " IR_Sensor: " + String(ir_distance));
-
-  // Decisions.BlockCollect(Bot, Sensors, PickUp, BotIMU, LineSensor);
-
-
+  Serial.println(String(Sensors.Ultrasound.GetDistance()));
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {

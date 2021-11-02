@@ -22,6 +22,7 @@ public:
 	void UpdateArenaSide();
 	void ReadAngles();
 	void Begin();
+	void Update();
 	RAMP_DIRECTION DetectRamp();
 
 private:

@@ -11,8 +11,8 @@ public:
 	void Sweep(int to_angle);
 
 	void SetInitalAngle(int angle);
-	bool inital_angle_set = false;
 
 private:
+	bool inital_angle_set = false;
 	byte PU_pin_servo;
 };
