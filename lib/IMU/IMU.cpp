@@ -2,7 +2,7 @@
 #include <Arduino_LSM6DS3.h>
 #include <RobotMath.h>
 #define SAMPLE_RATE 10
-int THRESHOLD_ANGLE = 20;
+int THRESHOLD_ANGLE = 10;
 
 /**
  * @brief Uses the IMU acceleration values to
@@ -12,10 +12,10 @@ int THRESHOLD_ANGLE = 20;
  * @return RAMP_DIRECTION
  */
 RAMP_DIRECTION RobotIMU::DetectRamp() {
-	if (pitch > THRESHOLD_ANGLE) {
+	if (roll > THRESHOLD_ANGLE) {
 		return UP;
 	}
-	else if (pitch < -THRESHOLD_ANGLE) {
+	else if (roll < -THRESHOLD_ANGLE) {
 		return DOWN;
 	}
 	else {
