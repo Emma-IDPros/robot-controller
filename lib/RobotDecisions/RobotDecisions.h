@@ -14,7 +14,7 @@ class RobotDecisions {
 public:
     void FollowLine_v0(Robot Bot, RobotLineSensor LineSensor);
     void FollowLine(Robot Bot, RobotLineSensor LineSensor, bool use_front_line = false);
-    void FollowLineWithWiFi(Robot Bot, RobotLineSensor LineSensor, bool use_front_line, WiFiComms WiFiComm);
+    // void FollowLineWithWiFi(Robot Bot, RobotLineSensor LineSensor, bool use_front_line, WiFiComms WiFiComm);
     void BlockCollect(Robot Bot, RobotSensors Sensors, RobotPickUp PickUp, RobotIMU BotIMU, RobotLineSensor LineSensor);
     void Junction(Robot Bot, RobotSensors Sensors, RobotPickUp PickUp, RobotIMU BotIMU, RobotLineSensor LineSensor, RobotMetalDetector MetalDetector);
 private:

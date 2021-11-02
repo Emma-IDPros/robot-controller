@@ -58,20 +58,16 @@ void loop() {
 
   // Updates --------------------------
   BotIMU.Update();
-  StatusLED.Blink(2, Bot.IsMoving());
+  Serial.println(String(Bot.IsMoving()));
+  StatusLED.Blink(4, Bot.IsMoving());
   // ----------------------------------
 
 
   //Decisions.FollowLine(Bot, LineSensor, false);
   // Decisions.FollowLine_v0(Bot, LineSensor);
 
-  while (i < 255) {
-    Bot.MoveAll(i, i > 100 ? FORWARD : BACKWARD);
-    i += 10;
-    delay(1000);
-    Serial.println(String(i));
-  }
-  Bot.StopAll();
+  Bot.Move(LEFT, 255, FORWARD);
+
 
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
