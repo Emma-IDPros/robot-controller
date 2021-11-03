@@ -36,3 +36,7 @@ void RobotStatusLED::LightUpMetalDetectorLED(bool on) {
 	digitalWrite(MD_LED_pin_on, on ? HIGH : LOW);
 	digitalWrite(MD_LED_pin_off, !on ? HIGH : LOW);
 }
+void RobotStatusLED::TurnOffMetalDetectorLED() {
+	digitalWrite(MD_LED_pin_on, LOW);
+	digitalWrite(MD_LED_pin_off, LOW);
+}
