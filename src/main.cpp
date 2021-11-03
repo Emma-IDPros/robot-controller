@@ -54,20 +54,21 @@ int metal_detector_start_time;
 void loop() {
 
   // Exit loop if toggle switch is toggled off
-  if (!ToggleSwitch.GetAndUpdateState()) {
-    Bot.StopAll(); BotIMU.arena_side = BEGINNING;
-    stages = GOING_TO_COLLECTION; PickUp.inital_angle_set = false;
-    return;
-  }
+  // if (!ToggleSwitch.GetAndUpdateState()) {
+  //   Bot.StopAll(); BotIMU.arena_side = BEGINNING;
+  //   stages = GOING_TO_COLLECTION; PickUp.inital_angle_set = false;
+  //   return;
+  // }
 
   // setting inital conditions
-  PickUp.SetInitalAngle(180); // this only runs once
 
   // Updates --------------------------
   BotIMU.Update();
   // Serial.println(String(Bot.IsMoving()));
   StatusLED.Blink(2, Bot.IsMoving());
-  StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
+  if (millis() - metal_detector_start_time > 5000) {
+    StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
+  }
   // ----------------------------------
 
 
@@ -77,6 +78,8 @@ void loop() {
   case GOING_TO_COLLECTION:
     Bot.Move(LEFT, 235, BACKWARD);
     Bot.Move(RIGHT, 255, BACKWARD);
+    if (!PickUp.inital_angle_set) { PickUp.Sweep(180); }
+    else { PickUp.inital_angle_set = true; }
     break;
   case STOP_AT_COLLECTION:
     Bot.StopAll();
@@ -136,7 +139,7 @@ void loop() {
     Bot.Move(LEFT, 235, BACKWARD);
     Bot.Move(RIGHT, 255, BACKWARD);
   }
-  Serial.println(String(Sensors.A02.GetDistance()) + " " + String(BotIMU.arena_side) + " " + String(stages));
+  Serial.println(String(Sensors.A02.GetDistance()) + " " + String(BotIMU.arena_side) + " " + String(stages) + " " + String(Bot.IsMoving()));
 
 
 #ifdef WIFI_DEBUG

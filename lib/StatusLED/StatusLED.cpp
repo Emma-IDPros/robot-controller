@@ -21,7 +21,9 @@ void RobotStatusLED::SetPins(byte S_LED_pin_inp, byte MD_LED_pin_on_inp, byte MD
  * @param on true of you want it on and false if you want it off
  */
 void RobotStatusLED::Blink(int frequency, bool on) {
-	if (millis() - prevMillis > 1 / (float)frequency * 2 * 1000 && on) {
+	Serial.print(String(millis()) + " " + String(prevMillis) + " " + String(millis() - prevMillis > 1 / (float)frequency));
+	if (millis() - prevMillis > 1 / (float)frequency * 500.0 && on) {
+		Serial.print("Blink");
 		S_LED_state = S_LED_state == LOW ? HIGH : LOW;
 		digitalWrite(S_LED_pin, S_LED_state);
 		prevMillis = millis();

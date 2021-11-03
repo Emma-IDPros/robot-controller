@@ -5,7 +5,7 @@
 class RobotPickUp {
 public:
 	Servo servo;
-	int angle;
+	int angle = 90;
 	void SetPins(byte servo_pin);
 	void SweepTest();
 	void Sweep(int to_angle);

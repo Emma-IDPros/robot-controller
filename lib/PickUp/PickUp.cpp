@@ -40,8 +40,8 @@ void RobotPickUp::Sweep(int to_angle) {
  */
 void RobotPickUp::SetInitalAngle(int angle_inp) {
 	if (!inital_angle_set) {
+		Sweep(angle);
 		angle = angle_inp;
-		servo.write(angle);
 		delay(300);
 		inital_angle_set = true;
 	}
