@@ -20,7 +20,6 @@ void RobotPickUp::Sweep(int to_angle) {
 	if (angle > to_angle) {
 		while (angle > to_angle) {
 			servo.write(angle);
-			Serial.println(angle);
 			angle--;
 			delay(30);
 		}
@@ -28,7 +27,6 @@ void RobotPickUp::Sweep(int to_angle) {
 	else {
 		while (angle < to_angle) {
 			servo.write(angle);
-			Serial.println(angle);
 			angle++;
 			delay(30);
 		}
