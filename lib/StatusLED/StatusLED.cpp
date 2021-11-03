@@ -40,3 +40,7 @@ void RobotStatusLED::TurnOffMetalDetectorLED() {
 	digitalWrite(MD_LED_pin_on, LOW);
 	digitalWrite(MD_LED_pin_off, LOW);
 }
+void RobotStatusLED::TurnOffAmberLight() {
+	digitalWrite(S_LED_pin, LOW);
+	S_LED_state = LOW;
+}

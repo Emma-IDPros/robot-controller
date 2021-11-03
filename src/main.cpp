@@ -54,11 +54,13 @@ int metal_detector_start_time;
 void loop() {
 
   // Exit loop if toggle switch is toggled off
-  // if (!ToggleSwitch.GetAndUpdateState()) {
-  //   Bot.StopAll(); BotIMU.arena_side = BEGINNING;
-  //   stages = GOING_TO_COLLECTION; PickUp.inital_angle_set = false;
-  //   return;
-  // }
+  if (!ToggleSwitch.GetAndUpdateState()) {
+    Bot.StopAll(); BotIMU.arena_side = BEGINNING;
+    stages = GOING_TO_COLLECTION; PickUp.inital_angle_set = false;
+    StatusLED.TurnOffAmberLight();
+    StatusLED.TurnOffMetalDetectorLED();
+    return;
+  }
 
   // setting inital conditions
 
@@ -69,7 +71,7 @@ void loop() {
   if (stages == RUN_METAL_SENSOR) {
     StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
   }
-  else if (millis() - metal_detector_start_time > 5000) {
+  else if (millis() - metal_detector_start_time > 10000) {
     StatusLED.TurnOffMetalDetectorLED();
   }
   // ----------------------------------
