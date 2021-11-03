@@ -66,9 +66,9 @@ void loop() {
   BotIMU.Update();
   // Serial.println(String(Bot.IsMoving()));
   StatusLED.Blink(2, Bot.IsMoving());
-  if (millis() - metal_detector_start_time > 5000) {
-    StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
-  }
+  // if (millis() - metal_detector_start_time > 5000) {
+  //   StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
+  // }
   // ----------------------------------
 
 
