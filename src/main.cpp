@@ -32,7 +32,7 @@ void setup() {
   Serial.begin(9600);
   Bot.MotorShieldTest(); // Test to see if board can be detected
   Sensors.SetPins(US_pinTrig, US_pinEcho, IR_A21pin, IR_A02pin);
-  // MetalDetector.SetPins(MD_pin_pulse, MD_pin_cap, MD_pin_LED1, MD_pin_LED2);
+  MetalDetector.SetPins(MD_pin_pulse, MD_pin_cap, MD_pin_LED1, MD_pin_LED2);
   LineSensor.SetPins(line_pin_sense, line_detect_pin, line_junc_detect_pin);
   PickUp.SetPins(PU_servo_pin);
   BotIMU.Begin();
@@ -47,11 +47,18 @@ void setup() {
 
 }
 
-int i = 0;
+enum STAGES { GOING_TO_COLLECTION, STOP_AT_COLLECTION, ROTATE_180, PICKUP_DROP, RUN_METAL_SENSOR, MOVE_TO_START };
+
+STAGES stages = GOING_TO_COLLECTION;
+int metal_detector_start_time;
 void loop() {
 
   // Exit loop if toggle switch is toggled off
-  // if (!ToggleSwitch.GetAndUpdateState()) { Bot.StopAll(); return; }
+  if (!ToggleSwitch.GetAndUpdateState()) {
+    Bot.StopAll(); BotIMU.arena_side = BEGINNING;
+    stages = GOING_TO_COLLECTION; PickUp.inital_angle_set = false;
+    return;
+  }
 
   // setting inital conditions
   PickUp.SetInitalAngle(180); // this only runs once
@@ -64,18 +71,63 @@ void loop() {
 
 
   //Decisions.FollowLine(Bot, LineSensor, false);
+  switch (stages)
+  {
+  case GOING_TO_COLLECTION:
+    Bot.Move(LEFT, 235, BACKWARD);
+    Bot.Move(RIGHT, 255, BACKWARD);
+    break;
+  case STOP_AT_COLLECTION:
+    Bot.StopAll();
+    delay(1000);
+    break;
+  case ROTATE_180:
+    Bot.Rotate(180, ANTICLOCKWISE);
+    delay(100);
+    break;
+  case PICKUP_DROP:
+    PickUp.Sweep(90);
+    delay(100);
+  case RUN_METAL_SENSOR:
+    MetalDetector.Detect();
+    metal_detector_start_time = millis();
+  case MOVE_TO_START:
+    Bot.Move(LEFT, 235, BACKWARD);
+    Bot.Move(RIGHT, 255, BACKWARD);
+    delay(100);
+    break;
+
+  default:
+    break;
+  }
 
 
-  if (BotIMU.arena_side == 1) {
-    if (Sensors.A02.GetDistance() <= 21) {
-
-      Bot.StopAll();
-      delay(10);
-      //Bot.Rotate(180, ANTICLOCKWISE);
+  if (BotIMU.arena_side == END) {
+    int distance = Sensors.A02.GetDistance();
+    if (distance <= 21 && distance > 0) {
+      if (stages == GOING_TO_COLLECTION) { stages = STOP_AT_COLLECTION; }
     }
     else {
-      Bot.Move(LEFT, 235, BACKWARD);
-      Bot.Move(RIGHT, 255, BACKWARD);
+      switch (stages)
+      {
+      case STOP_AT_COLLECTION:
+        stages = ROTATE_180;
+        break;
+      case ROTATE_180:
+        stages = PICKUP_DROP;
+        break;
+      case PICKUP_DROP:
+        stages = RUN_METAL_SENSOR;
+        break;
+      case  RUN_METAL_SENSOR:
+        if (millis() - metal_detector_start_time > 5000) {
+          stages = MOVE_TO_START;
+        }
+        break;
+
+      default:
+        break;
+      }
     }
   }
   else {
@@ -83,7 +135,7 @@ void loop() {
     Bot.Move(LEFT, 235, BACKWARD);
     Bot.Move(RIGHT, 255, BACKWARD);
   }
-  Serial.println(String(Sensors.A02.GetDistance()) + " " + String(BotIMU.arena_side));
+  Serial.println(String(Sensors.A02.GetDistance()) + " " + String(BotIMU.arena_side) + " " + String(stages));
 
 
 #ifdef WIFI_DEBUG
