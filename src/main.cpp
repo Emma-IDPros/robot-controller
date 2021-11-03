@@ -51,6 +51,7 @@ enum STAGES { GOING_TO_COLLECTION, STOP_AT_COLLECTION, ROTATE_180, PICKUP_DROP, 
 
 STAGES stages = GOING_TO_COLLECTION;
 int metal_detector_start_time;
+int metal_detector_led_time;
 void loop() {
 
   // Exit loop if toggle switch is toggled off
@@ -70,8 +71,9 @@ void loop() {
   StatusLED.Blink(2, Bot.IsMoving());
   if (stages == RUN_METAL_SENSOR) {
     StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
+    metal_detector_led_time = millis();
   }
-  else if (millis() - metal_detector_start_time > 10000) {
+  else if (millis() - metal_detector_led_time > 5000) {
     StatusLED.TurnOffMetalDetectorLED();
   }
   // ----------------------------------
@@ -113,7 +115,7 @@ void loop() {
 
   if (BotIMU.arena_side == END) {
     int distance = Sensors.A02.GetDistance();
-    if (distance <= 21 && distance > 0) {
+    if (distance <= 23 && distance > 0) {
       if (stages == GOING_TO_COLLECTION) { stages = STOP_AT_COLLECTION; }
     }
     else {
