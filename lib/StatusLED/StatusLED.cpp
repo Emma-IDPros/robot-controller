@@ -5,11 +5,13 @@
  *
  * @param S_LED_pin_inp Amber led pin
  */
-void RobotStatusLED::SetPins(byte S_LED_pin_inp, byte MD_LED_pin_inp) {
+void RobotStatusLED::SetPins(byte S_LED_pin_inp, byte MD_LED_pin_on_inp, byte MD_LED_pin_off_inp) {
 	pinMode(S_LED_pin_inp, OUTPUT);
-	pinMode(MD_LED_pin_inp, OUTPUT);
+	pinMode(MD_LED_pin_on_inp, OUTPUT);
+	pinMode(MD_LED_pin_off_inp, OUTPUT);
 	S_LED_pin = S_LED_pin_inp;
-	MD_LED_pin = MD_LED_pin_inp;
+	MD_LED_pin_on = MD_LED_pin_on_inp;
+	MD_LED_pin_off = MD_LED_pin_off_inp;
 }
 
 /**
@@ -30,5 +32,6 @@ void RobotStatusLED::Blink(int frequency, bool on) {
 	}
 }
 void RobotStatusLED::LightUpMetalDetectorLED(bool on) {
-	digitalWrite(MD_LED_pin, on ? HIGH : LOW);
+	digitalWrite(MD_LED_pin_on, on ? HIGH : LOW);
+	digitalWrite(MD_LED_pin_off, !on ? HIGH : LOW);
 }

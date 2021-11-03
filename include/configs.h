@@ -14,3 +14,5 @@ extern const byte PU_servo_pin = 10;
 extern const byte amber_led_pin = 5;
 extern const byte T_detect_pin = 2;
 extern const byte T_led_pin = 13;
+extern const byte MD_led_pin_on = 9;
+extern const byte MD_led_pin_off = 8;

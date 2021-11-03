@@ -37,7 +37,7 @@ void setup() {
   PickUp.SetPins(PU_servo_pin);
   BotIMU.Begin();
   ToggleSwitch.SetPins(T_detect_pin, T_led_pin);
-  StatusLED.SetPins(amber_led_pin);
+  StatusLED.SetPins(amber_led_pin, MD_led_pin_on, MD_led_pin_off);
 
   LineSensor.SetThresholdValues(253, 480);
 
@@ -67,6 +67,7 @@ void loop() {
   BotIMU.Update();
   // Serial.println(String(Bot.IsMoving()));
   StatusLED.Blink(2, Bot.IsMoving());
+  StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
   // ----------------------------------
 
 
