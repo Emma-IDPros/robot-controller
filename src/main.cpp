@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @author IDPros
- * @brief This is the main file for the arduino containg the setup and void
+ * @brief This is the main file for the arduino containg the setup and loop
  *
  * !!!!!IMPORTANT!!!!!
  *
