@@ -13,7 +13,7 @@ class RobotMetalDetector {
 public:
 	bool detected; //create bool for if metal detected
 
-	void SetPins(byte pin_pulse, byte pin_cap = 1, byte pin_LED1 = 12, byte pin_LED2 = 11);
+	void SetPins(byte pin_pulse, byte pin_cap = 1);
 	void Detect();
 	void Debug();
 
