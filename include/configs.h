@@ -9,7 +9,7 @@
 
 #pragma once
 extern const byte IR_A02pin = 0;// analog
-extern const byte IR_A21pin = 3;// analog
+extern const byte IR_A21pin = 12// analog
 extern const byte US_pinTrig = 3;// digital
 extern const byte US_pinEcho = 4;// digital
 extern const byte MD_pin_pulse = 11; // digital
