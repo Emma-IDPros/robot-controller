@@ -1,11 +1,20 @@
+/**
+ * @file LineSensor.cpp
+ * @author IDPros
+ * @brief Implemetation of the proportional control line sensors and
+ * the digital line sensors
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <LineSensor.h>
 
-/**
- * @brief Set the pins for the line sensor
- *
- * @param line_pin_sense ANALOGUE
- * @param line_detect_pin DIGITAL
- */
+ /**
+  * @brief Set the pins for the line sensor
+  *
+  * @param line_pin_sense ANALOGUE
+  * @param line_detect_pin DIGITAL
+  */
 void RobotLineSensor::SetPins(byte line_pin_sense, byte line_detect_pin, byte line_junc_detect_pin) {
 	line_pin_sense = line_pin_sense;
 	line_detect_pin = line_detect_pin;

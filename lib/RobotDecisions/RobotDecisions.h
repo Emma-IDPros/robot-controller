@@ -1,3 +1,11 @@
+/**
+ * @file RobotDecisions.h
+ * @author IDPros
+ * @brief header file for the RobotDecisions class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino.h>
 #include <Robot.h>

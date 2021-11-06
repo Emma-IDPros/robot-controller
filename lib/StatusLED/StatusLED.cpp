@@ -1,10 +1,19 @@
+/**
+ * @file StatusLED.cpp
+ * @author IDPros
+ * @brief Methods in the file are used to light up
+ * all the status LEDs that are present on the robot
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <StatusLED.h>
 
-/**
- * @brief Setting pins
- *
- * @param S_LED_pin_inp Amber led pin
- */
+ /**
+  * @brief Setting pins
+  *
+  * @param S_LED_pin_inp Amber led pin
+  */
 void RobotStatusLED::SetPins(byte S_LED_pin_inp, byte MD_LED_pin_on_inp, byte MD_LED_pin_off_inp) {
 	pinMode(S_LED_pin_inp, OUTPUT);
 	pinMode(MD_LED_pin_on_inp, OUTPUT);

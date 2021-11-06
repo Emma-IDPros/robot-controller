@@ -1,3 +1,11 @@
+/**
+ * @file StatusLED.h
+ * @author IDPros
+ * @brief Header file for the RobotStatusLED class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino.h>
 

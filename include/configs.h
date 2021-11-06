@@ -1,3 +1,12 @@
+/**
+ * @file configs.h
+ * @author IDPros
+ * @brief Pin configs
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
+
 #pragma once
 extern const byte IR_A02pin = 0;//must be analog
 extern const byte IR_A21pin = 3;//must be analog

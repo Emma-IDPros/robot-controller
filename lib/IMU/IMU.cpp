@@ -1,3 +1,12 @@
+/**
+ * @file IMU.cpp
+ * @author IDPros
+ * @brief Implementations of methods using the onboard IMU.
+ * These implemetations focus on using the IMU to perform ramp detection
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <IMU.h>
 #include <Arduino_LSM6DS3.h>
 #include <RobotMath.h>

@@ -1,3 +1,12 @@
+/**
+ * @file RobotDecisions.cpp
+ * @author IDPros
+ * @brief This file contains all the methods that govern our orignal line following
+ * and junction detection algorithms, and how the detections effect the Robots movement
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <RobotDecisions.h>
 #include <LineSensor.h>
 

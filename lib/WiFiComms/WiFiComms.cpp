@@ -1,13 +1,22 @@
+/**
+ * @file WiFiComms.cpp
+ * @author IDPros
+ * @brief Methods that are used to communicate/send information
+ * to a computer via WiFi
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <WiFiComms.h>
 #include <ArduinoHttpClient.h>
 #include <WiFiNINA.h>
 #include <Arduino.h>
-// #define WIFI_EVALUATE_STATUS_CODES
+ // #define WIFI_EVALUATE_STATUS_CODES
 
-/**
- * @brief Connect to the WiFi hotspot on Lakee's computer
- *
- */
+ /**
+  * @brief Connect to the WiFi hotspot on Lakee's computer
+  *
+  */
 void WiFiComms::Connect() {
 	int i = 0;
 	while (wl_status != WL_CONNECTED) {
@@ -55,7 +64,7 @@ void WiFiComms::Get(String endpoint) {
 	}
 #endif
 
-}
+	}
 
 /**
  * @brief Sends coordinate data to the server

@@ -1,3 +1,21 @@
+/**
+ * @file main.cpp
+ * @author IDPros
+ * @brief This is the main file for the arduino containg the setup and void
+ *
+ * !!!!!IMPORTANT!!!!!
+ *
+ * The code illustarted in the loop function is the fail-safe/backup code that we had to make for
+ * the final competetion due to the line sensors not working.
+ * Our original code on the algorithms that are documented can be found in
+ *
+ * ../lib/RobotDecisions/RobotDecisions.cpp
+ * ../lib/RobotDecisions/RobotDecisions.h
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
+
 #include <Arduino.h>
 #include "Robot.h"
 #include "RobotSensors.h"
@@ -9,7 +27,7 @@
 #include "RobotDecisions.h"
 #include "ToggleSwitch.h"
 #include "StatusLED.h"
-// #define WIFI_DEBUG
+#define WIFI_DEBUG
 
 
 #ifdef WIFI_DEBUG
@@ -67,7 +85,6 @@ void loop() {
 
   // Updates --------------------------
   BotIMU.Update();
-  // Serial.println(String(Bot.IsMoving()));
   StatusLED.Blink(2, Bot.IsMoving());
   if (stages == RUN_METAL_SENSOR) {
     StatusLED.LightUpMetalDetectorLED(MetalDetector.detected);
@@ -79,7 +96,6 @@ void loop() {
   // ----------------------------------
 
 
-  //Decisions.FollowLine(Bot, LineSensor, false);
   switch (stages)
   {
   case GOING_TO_COLLECTION:
@@ -152,7 +168,7 @@ void loop() {
 #ifdef WIFI_DEBUG
   if (WiFiComm.wl_status == WL_CONNECTED) {
 
-    // WiFiComm.Message(String(ultrasound_distance));
+    WiFiComm.Message(String(Sensors.A02.GetDistance()) + " " + String(BotIMU.arena_side) + " " + String(stages) + " " + String(Bot.IsMoving()));
 
   }
 #endif

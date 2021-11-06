@@ -1,3 +1,11 @@
+/**
+ * @file ToggleSwitch.h
+ * @author IDPros
+ * @brief Header ile for the RobotToggleSwitch class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino.h>
 

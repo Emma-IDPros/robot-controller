@@ -1,11 +1,20 @@
+/**
+ * @file ToggleSwitch.cpp
+ * @author IDPros
+ * @brief Methods that are used to toggle the robot on and off using
+ * a toggle switch
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <ToggleSwitch.h>
 
-/**
- * @brief Set the pins
- *
- * @param detect_pin_inp DIGITAL input pin
- * @param led_pin_inp  DIGITAL output pin
- */
+ /**
+  * @brief Set the pins
+  *
+  * @param detect_pin_inp DIGITAL input pin
+  * @param led_pin_inp  DIGITAL output pin
+  */
 void RobotToggleSwitch::SetPins(byte detect_pin_inp, byte led_pin_inp) {
 	detect_pin = detect_pin_inp;
 	led_pin = led_pin_inp;

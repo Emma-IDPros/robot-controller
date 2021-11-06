@@ -1,3 +1,11 @@
+/**
+ * @file PickUp.h
+ * @author IDPros
+ * @brief Header file for the RobotPickUp class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino.h>
 #include <Servo.h>

@@ -1,11 +1,19 @@
+/**
+ * @file PickUp.cpp
+ * @author IDPros
+ * @brief
+ *  Implemetation of the servo used for the block collection mechanism
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <PickUp.h>
 
-/**
- * @brief Set pins
- *
- * @param servo_pin Either 9 or 10,
- * use the servo connector on the Motor Shield
- */
+ /**
+  * @brief Set pins
+  *
+  * @param servo_pin Either 9 or 10,
+  * use the servo connector on the Motor Shield
+  */
 void RobotPickUp::SetPins(byte servo_pin) {
 	servo.attach(servo_pin);
 }

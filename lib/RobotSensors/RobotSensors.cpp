@@ -1,11 +1,22 @@
+/**
+ * @file RobotSensors.cpp
+ * @author IDPros
+ * @brief This file contains all the distance sensors used in the robots,
+ * and their respective GetDistance methods
+ * @version 0.1
+ * @date 2021-11-06
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <Arduino.h>
 #include <RobotSensors.h>
 
-/**
- * @brief Gets the distance from the ultrasound (in cm)
- *
- * @return float distance (cm)
- */
+ /**
+  * @brief Gets the distance from the ultrasound (in cm)
+  *
+  * @return float distance (cm)
+  */
 float Ultrasound::GetDistance() {
 	digitalWrite(US_pinTrig, LOW);
 	delayMicroseconds(3);

@@ -1,3 +1,11 @@
+/**
+ * @file Robot.h
+ * @author IDPros
+ * @brief Header file for the Robot class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <LineSensor.h>
 #include <Arduino.h>
@@ -23,7 +31,7 @@ public:
 	void MoveAll(uint8_t speed, uint8_t DIRECTION);
 	void Stop(MOTOR motor);
 	void StopAll();
-//	void Rotate(ROTATION rotation, RobotLineSensor LineSensor);
+	//	void Rotate(ROTATION rotation, RobotLineSensor LineSensor);
 	void Rotate(uint8_t angle, ROTATION rotation);
 	bool IsMoving();
 private:

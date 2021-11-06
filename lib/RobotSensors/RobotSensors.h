@@ -1,6 +1,14 @@
+/**
+ * @file RobotSensors.h
+ * @author IDPros
+ * @brief Header file for the RobotSensors
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 
-// Class for the ultrasound
+ // Class for the ultrasound
 class Ultrasound {
 public:
 	byte US_pinTrig;

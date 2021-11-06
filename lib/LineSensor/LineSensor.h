@@ -1,3 +1,11 @@
+/**
+ * @file LineSensor.h
+ * @author IDPros
+ * @brief Header for the RobotLineSensor class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino.h>
 

@@ -1,3 +1,11 @@
+/**
+ * @file MetalDetector.h
+ * @author IDPros
+ * @brief Header file for the RobotMetalDetector class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino.h>
 

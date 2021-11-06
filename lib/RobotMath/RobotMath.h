@@ -1,3 +1,11 @@
+/**
+ * @file RobotMath.h
+ * @author IDPros
+ * @brief Header file for the RobotMath class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 
 class RobotMath {

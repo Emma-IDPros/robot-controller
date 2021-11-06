@@ -1,13 +1,20 @@
+/**
+ * @file MetalDetector.cpp
+ * @brief Implementation of the metal detector
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <MetalDetector.h>
 
-/**
- * @brief Sets the pins
- *
- * @param pin_pulse DIGITAL
- * @param pin_cap ANALOGUE
- * @param pin_LED1 DIGITAL
- * @param pin_LED2 DIGITAL
- */
+ /**
+  * @brief Sets the pins
+  *
+  * @param pin_pulse DIGITAL
+  * @param pin_cap ANALOGUE
+  * @param pin_LED1 DIGITAL
+  * @param pin_LED2 DIGITAL
+  */
 void RobotMetalDetector::SetPins(byte pin_pulse, byte pin_cap = 1, byte pin_LED1 = 12, byte pin_LED2 = 11) {
 	pin_pulse = pin_pulse;
 	pin_cap = pin_cap;

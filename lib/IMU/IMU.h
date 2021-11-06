@@ -1,8 +1,16 @@
+/**
+ * @file IMU.h
+ * @author IDPros
+ * @brief Header file for the RobotIMU class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <Arduino_LSM6DS3.h>
 #include <math.h>
 #include <MadgwickAHRS.h>
-// #include <SensorFusion.h>
+ // #include <SensorFusion.h>
 
 enum ARENA_SIDE { BEGINNING, END };
 enum RAMP_DIRECTION { UP, DOWN, FLAT };

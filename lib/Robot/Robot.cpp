@@ -1,3 +1,12 @@
+/**
+ * @file Robot.cpp
+ * @author IDPros
+ * @brief This is the main class that is used to control the
+ * robots movement
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
@@ -7,10 +16,10 @@
 #include "LineSensor.h"
 
 
-/**
- * @brief Runs the Adafruit Test Script for the
- * Motor Shield.
- */
+ /**
+  * @brief Runs the Adafruit Test Script for the
+  * Motor Shield.
+  */
 void Robot::MotorShieldTest() {
 	Serial.println("Adafruit Motorshield v2 - DC Motor test!");
 	if (!AFMS.begin()) {

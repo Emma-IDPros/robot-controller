@@ -1,3 +1,11 @@
+/**
+ * @file WiFiComms.h
+ * @author IDPros
+ * @brief Header file for the WiFiComms class
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #pragma once
 #include <ArduinoHttpClient.h>
 #include <WiFiNINA.h>
